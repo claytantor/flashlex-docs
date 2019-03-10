@@ -78,3 +78,7 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# the ui build 
+ui/public/
+ui/public/*
