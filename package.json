@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "$(npm bin)/antora site.yml",
-    "serve": "$(npm bin)/serve build/site"
+    "serve": "$(npm bin)/serve build/site",
+    "buildui": "cd ui && $(npm bin)/gulp bundle && cd .."
   },
   "author": "",
   "license": "ISC",

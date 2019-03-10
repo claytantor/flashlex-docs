@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Component B! :: Flashlex Demo Site</title>
+    <title>FlashLex dev Docs :: FlashLex Documentation</title>
     <meta name="generator" content="Antora 2.0.0">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
@@ -11,7 +11,7 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="../..">Flashlex Demo Site</a>
+      <a class="navbar-item" href="../..">FlashLex Documentation</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -19,33 +19,6 @@
       </button>
     </div>
     <div id="topbar-nav" class="navbar-menu">
-      <div class="navbar-end">
-        <a class="navbar-item" href="#">Home</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Products</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Product A</a>
-            <a class="navbar-item" href="#">Product B</a>
-            <a class="navbar-item" href="#">Product C</a>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Services</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Service A</a>
-            <a class="navbar-item" href="#">Service B</a>
-            <a class="navbar-item" href="#">Service C</a>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Resources</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Resource A</a>
-            <a class="navbar-item" href="#">Resource B</a>
-            <a class="navbar-item" href="#">Resource C</a>
-          </div>
-        </div>
-      </div>
     </div>
   </nav>
 </header>
@@ -55,34 +28,19 @@
     <div class="panels">
 <div class="navigation-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Getting Started</a></h3>
+    <h3 class="title"><a href="index.html">FlashLex</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="inline-text-formatting.html">Basic Inline Text Formatting</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="special-characters.html">Special Characters &amp; Symbols</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="admonition.html">Admonition</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="sidebar.html">Sidebar</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="ui-macros.html">UI Macros</a>
+    <a class="nav-link" href="getting-started.html">Getting Started</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
-    <span class="nav-text">Lists</span>
+    <span class="nav-text">Site</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="lists/ordered-list.html">Ordered List</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="lists/unordered-list.html">Unordered List</a>
+    <a class="nav-link" href="site/registration.html">Registration</a>
   </li>
 </ul>
   </li>
@@ -93,12 +51,12 @@
 </div>
 <div class="navigation-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Getting Started</span>
+    <span class="title">FlashLex</span>
     <span class="version">dev</span>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <span class="title">Getting Started</span>
+      <span class="title">FlashLex</span>
       <ul class="versions">
         <li class="version is-current is-latest">
           <a href="index.html">dev</a>
@@ -116,66 +74,86 @@
   <a href="index.html" class="home-link is-current"></a>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
-    <li class="crumb"><a href="index.html">Getting Started</a></li>
-    <li class="crumb"><a href="index.html">Welcome to Component B!</a></li>
+    <li class="crumb"><a href="index.html">FlashLex</a></li>
+    <li class="crumb"><a href="index.html">FlashLex <strong>dev Docs</strong></a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="file:///Users/claytongraham/data/github/claytantor/flashlex-docs/component/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
 </div>
 <article class="doc">
-<h1>Welcome to Component B!</h1>
-<div id="preamble">
+<h1>FlashLex <strong>dev Docs</strong></h1>
+<div class="sect1">
+<h2 id="what-is-flashlex"><a class="anchor" href="#what-is-flashlex"></a>What is FlashLex?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is the automatic start page for version <strong>dev</strong> of Component B.</p>
+<p>FlashLex is an internet gateway for the internet of things. It provides a simple way to expose your IOT enabled device using our REST API in the cloud by installing distribution SDK bundles capabile of recieving and publishing IOT messages. The FlashLex platform routes published messages made via REST API calls using a secure access token to a topic subscribed by your thing, as well as provide a persistent queriable store for the collection of data published by your thing.</p>
 </div>
 <div class="paragraph">
-<p>Component B is one of two documentation components in the Antora Demo.
-The other docs component, Component A, can be accessed via the component selector menu (aka component drawer) at the bottom of the menu on the left side of the page.</p>
+<p>It relies on two primary concepts for managing and communicating with each thing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Messaging - The ability to send a message to the thing via a topic, or pull messages that the thing has sent.</p>
+</li>
+<li>
+<p>Shadows - Controls the state of a specific thing. Use a JSON document to represent the aspects of the thing that should say the same until it is updated. These can be attribues such as gauges or system settings on the thing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Core capabilities include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sending Messages To Your Thing - Use the Cloud based REST API to send TLS based secure messages to your IOT device. Supports free text, json, or pinout based messages via REST API.</p>
+</li>
+<li>
+<p>Query and Collect Messages From Your Thing - Use the Cloud based REST API to query and collect data from your IOT device. Messages are stored in our database for searchable data collection based on message tagging. Messages expire if not collected.</p>
+</li>
+<li>
+<p>Build IOT Applications using the Client SDK -</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>FlashLex gives the IOT developer a simple messaging platform in the cloud so they can focus on building great things. This is accomplished by downloading the FlashLex Client SDK of their choice distribution and installing it on the thing. The IOT developer then can write their custom application code using the FlashLex Client SDK in the distribution.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Current language support for the SDK is limited to Python.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="page-source"><a class="anchor" href="#page-source"></a>Page source</h2>
+<h2 id="sending-messages-to-your-thing"><a class="anchor" href="#sending-messages-to-your-thing"></a>Sending Messages To Your Thing</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>This page is sourced from the AsciiDoc file named <em class="path">index.adoc</em> that is located at <em class="path">demo-component-b/docs/modules/ROOT/pages</em>.</p>
-</div>
-<div class="sect2">
-<h3 id="why-is-this-the-home-page-of-component-b"><a class="anchor" href="#why-is-this-the-home-page-of-component-b"></a>Why is this the home page of Component B?</h3>
-<div class="paragraph">
-<p>This page is automatically used as the start page of Component B because it is stored in the ROOT module and named <em class="path">index.adoc</em>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="why-is-this-the-home-page-of-the-antora-demo-site"><a class="anchor" href="#why-is-this-the-home-page-of-the-antora-demo-site"></a>Why is this the home page of the Antora Demo site?</h3>
-<div class="paragraph">
-<p>This page is used as the home page for the Antora Demo because it is assigned as the site <code>start_page</code> in the Demo site&#8217;s playbook file <em class="path">site.yml</em>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/flashlex-send-usecase.png" alt="send usecase">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cross-reference-syntax-to-target-this-page"><a class="anchor" href="#cross-reference-syntax-to-target-this-page"></a>Cross reference syntax to target this page</h2>
+<h2 id="collecting-messages-from-your-thing"><a class="anchor" href="#collecting-messages-from-your-thing"></a>Collecting Messages From Your Thing</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>To create a cross reference <strong>to this page from another page in the ROOT module of Component B</strong>, the xref syntax would be <code>xref:index.adoc[]</code>.</p>
-</div>
-<div class="paragraph">
-<p>To create a cross reference <strong>to this page from a page in Module One of Component B</strong>, the xref syntax would be <code>xref:ROOT:index.adoc[]</code>.</p>
-</div>
-<div class="sect2">
-<h3 id="always-target-the-latest-version-of-this-page"><a class="anchor" href="#always-target-the-latest-version-of-this-page"></a>Always target the latest version of this page</h3>
-<div class="paragraph">
-<p>To create a cross reference <strong>to the latest version of this page from a page in Component A</strong>, the xref syntax would be <code>xref:component-b::index.adoc[]</code>.</p>
+
 </div>
 </div>
-<div class="sect2">
-<h3 id="target-a-specific-version-of-this-page"><a class="anchor" href="#target-a-specific-version-of-this-page"></a>Target a specific version of this page</h3>
-<div class="paragraph">
-<p>To create a cross reference <strong>to version 1.0 of this page from a page in Component A</strong>, the xref syntax would be <code>xref:1.0@component-b::index.adoc[]</code>.</p>
-</div>
-</div>
+<div class="sect1">
+<h2 id="builing-your-iot-application"><a class="anchor" href="#builing-your-iot-application"></a>Builing your IOT Application</h2>
+<div class="sectionbody">
+
 </div>
 </div>
 </article>

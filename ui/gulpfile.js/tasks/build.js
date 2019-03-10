@@ -42,11 +42,18 @@ module.exports = (src, dest, preview) => () => {
     preview ? () => {} : cssnano({ preset: 'default' }),
   ]
 
-  return merge(
+  return merge( 
     vfs
-      .src('js/+([0-9])-*.js', opts)
-      .pipe(uglify())
-      .pipe(concat('js/site.js')),
+      .src('js/*.js', Object.assign({ read: false }, opts))
+      .pipe(
+        // see https://gulpjs.org/recipes/browserify-multiple-destination.html
+        map((file, enc, next) => {
+          file.contents = browserify(file.relative, { basedir: src, detectGlobals: false }).bundle()
+          next(null, file)
+        })
+      )
+      .pipe(buffer())
+      .pipe(uglify()),         
     vfs
       .src('js/vendor/*.js', Object.assign({ read: false }, opts))
       .pipe(

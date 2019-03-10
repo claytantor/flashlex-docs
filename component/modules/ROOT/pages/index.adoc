@@ -1,4 +1,4 @@
-= Welcome to Component B!
+= FlashLex *{page-component-version} Docs*
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -6,33 +6,32 @@ endif::[]
 :idprefix:
 :idseparator: -
 
-This is the automatic start page for version *{page-component-version}* of Component B.
+== What is FlashLex?
+FlashLex is an internet gateway for the internet of things. It provides a simple way to expose your IOT enabled device using our REST API in the cloud by installing distribution SDK bundles capabile of recieving and publishing IOT messages. The FlashLex platform routes published messages made via REST API calls using a secure access token to a topic subscribed by your thing, as well as provide a persistent queriable store for the collection of data published by your thing.   
 
-Component B is one of two documentation components in the Antora Demo.
-The other docs component, Component A, can be accessed via the component selector menu (aka component drawer) at the bottom of the menu on the left side of the page.
+It relies on two primary concepts for managing and communicating with each thing:
 
-== Page source
+* Messaging - The ability to send a message to the thing via a topic, or pull messages that the thing has sent.
+* Shadows - Controls the state of a specific thing. Use a JSON document to represent the aspects of the thing that should say the same until it is updated. These can be attribues such as gauges or system settings on the thing.
 
-This page is sourced from the AsciiDoc file named [.path]_index.adoc_ that is located at [.path]_demo-component-b/docs/modules/ROOT/pages_.
+Core capabilities include:
 
-=== Why is this the home page of Component B?
+* Sending Messages To Your Thing - Use the Cloud based REST API to send TLS based secure messages to your IOT device. Supports free text, json, or pinout based messages via REST API.
+* Query and Collect Messages From Your Thing - Use the Cloud based REST API to query and collect data from your IOT device. Messages are stored in our database for searchable data collection based on message tagging. Messages expire if not collected.  
+* Build IOT Applications using the Client SDK - 
 
-This page is automatically used as the start page of Component B because it is stored in the ROOT module and named [.path]_index.adoc_.
+FlashLex gives the IOT developer a simple messaging platform in the cloud so they can focus on building great things. This is accomplished by downloading the FlashLex Client SDK of their choice distribution and installing it on the thing. The IOT developer then can write their custom application code using the FlashLex Client SDK in the distribution. 
 
-=== Why is this the home page of the Antora Demo site?
+NOTE: Current language support for the SDK is limited to Python.
 
-This page is used as the home page for the Antora Demo because it is assigned as the site `start_page` in the Demo site's playbook file [.path]_site.yml_.
+== Sending Messages To Your Thing
+image::flashlex-send-usecase.png[send usecase]
 
-== Cross reference syntax to target this page
 
-To create a cross reference *to this page from another page in the ROOT module of Component B*, the xref syntax would be `\xref:index.adoc[]`.
+== Collecting Messages From Your Thing
 
-To create a cross reference *to this page from a page in Module One of Component B*, the xref syntax would be `\xref:ROOT:index.adoc[]`.
 
-=== Always target the latest version of this page
+== Building your IOT Application
 
-To create a cross reference *to the latest version of this page from a page in Component A*, the xref syntax would be `\xref:component-b::index.adoc[]`.
 
-=== Target a specific version of this page
 
-To create a cross reference *to version 1.0 of this page from a page in Component A*, the xref syntax would be `\xref:1.0@component-b::index.adoc[]`.

@@ -82,3 +82,7 @@ typings/
 # the ui build 
 ui/public/
 ui/public/*
+build/*
+build/
+out/
+out/*
