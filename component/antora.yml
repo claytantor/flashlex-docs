@@ -1,0 +1,5 @@
+name: component-getting-started
+title: Getting Started
+version: dev
+nav:
+- modules/ROOT/nav.adoc
