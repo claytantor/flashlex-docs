@@ -1,10 +1,5 @@
 @startuml flashlex-main-component
 
-
-
-
-
-
 package "User Cloud" {
 [IOT Backend] as [Backend]
 }
@@ -20,8 +15,6 @@ package "Thing" {
 [IOT Application] as [App]
 [Flashlex Client SDK] as [SDK]
 }
-
-
 
 [Backend]-->[API]
 
