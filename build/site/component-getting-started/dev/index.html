@@ -36,6 +36,15 @@
     <a class="nav-link" href="getting-started.html">Getting Started</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="sending-messages.html">Sending Messages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="collecting-messages.html">Collecting Messages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="shadow-intro.html">Intro To Shadows</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-toggle"></button>
     <span class="nav-text">Site</span>
 <ul class="nav-list">
@@ -86,39 +95,8 @@
 <h2 id="what-is-flashlex"><a class="anchor" href="#what-is-flashlex"></a>What is FlashLex?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>FlashLex is an internet gateway for the internet of things. It provides a simple way to expose your IOT enabled device using our REST API in the cloud by installing distribution SDK bundles capabile of recieving and publishing IOT messages. The FlashLex platform routes published messages made via REST API calls using a secure access token to a topic subscribed by your thing, as well as provide a persistent queriable store for the collection of data published by your thing.</p>
-</div>
-<div class="paragraph">
-<p>It relies on two primary concepts for managing and communicating with each thing:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Messaging - The ability to send a message to the thing via a topic, or pull messages that the thing has sent.</p>
-</li>
-<li>
-<p>Shadows - Controls the state of a specific thing. Use a JSON document to represent the aspects of the thing that should say the same until it is updated. These can be attribues such as gauges or system settings on the thing.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Core capabilities include:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Sending Messages To Your Thing - Use the Cloud based REST API to send TLS based secure messages to your IOT device. Supports free text, json, or pinout based messages via REST API.</p>
-</li>
-<li>
-<p>Query and Collect Messages From Your Thing - Use the Cloud based REST API to query and collect data from your IOT device. Messages are stored in our database for searchable data collection based on message tagging. Messages expire if not collected.</p>
-</li>
-<li>
-<p>Build IOT Applications using the Client SDK -</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>FlashLex gives the IOT developer a simple messaging platform in the cloud so they can focus on building great things. This is accomplished by downloading the FlashLex Client SDK of their choice distribution and installing it on the thing. The IOT developer then can write their custom application code using the FlashLex Client SDK in the distribution.</p>
+<p>FlashLex is an internet gateway for the internet of things. It provides a simple way to access your IOT enabled device using our REST API and installed distribution SDK bundles. Using our platform makes your device capabile of recieving and publishing IOT messages in minutes. The FlashLex platform provides a simple consistent way for your backed to route published messages made via REST API calls using a secure access token to a topic subscribed by your thing, gives your backend control over the state of all your IOT fleet and provides a persistent queriable store for the collection of data published by your things.
+FlashLex gives the IOT developer a simple messaging platform in the cloud so they can focus on building great things. This is accomplished by downloading the FlashLex Client SDK of their choice distribution and installing it on the thing. The IOT developer then can write their custom application code using the FlashLex Client SDK in the distribution.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -135,33 +113,68 @@ Current language support for the SDK is limited to Python.
 </div>
 </div>
 <div class="sect1">
-<h2 id="sending-messages-to-your-thing"><a class="anchor" href="#sending-messages-to-your-thing"></a>Sending Messages To Your Thing</h2>
+<h2 id="capabilities-of-flashlex"><a class="anchor" href="#capabilities-of-flashlex"></a>Capabilities Of FlashLex</h2>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="_images/flashlex-send-usecase.png" alt="send usecase">
+<img src="_images/flashlex-main-usecase.png" alt="main usecase">
 </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sending Messages To Your Thing - Use the Cloud based REST API to send TLS based secure messages to your IOT device. Supports free text, json, or pinout based messages via REST API.</p>
+</li>
+<li>
+<p>Query and Collect Messages From Your Thing - Use the Cloud based REST API to query and collect data from your IOT device. Messages are stored in our database for searchable data collection based on message tagging. Messages expire if not collected.</p>
+</li>
+<li>
+<p>Manage Your Thing&#8217;s Shadow - Controls the state of a specific thing. Use a JSON document to represent the aspects of the thing that should say the same until it is updated. These can be attribues such as gauges or system settings on the thing.</p>
+</li>
+<li>
+<p>Build IOT Applications using the FlashLex Client SDK Distribution - Download the SDK distribution for your development platform and languages and use the SDK to subscribe to topics which your custom IOT application can respond to, change your things state based on your thing&#8217;s shadow, or collect data that you can publish back to FlashLex.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="collecting-messages-from-your-thing"><a class="anchor" href="#collecting-messages-from-your-thing"></a>Collecting Messages From Your Thing</h2>
+<h2 id="flashlex-platform-components"><a class="anchor" href="#flashlex-platform-components"></a>FlashLex Platform Components</h2>
 <div class="sectionbody">
-
+<div class="imageblock">
+<div class="content">
+<img src="_images/flashlex-main-component.png" alt="main component">
 </div>
 </div>
-<div class="sect1">
-<h2 id="builing-your-iot-application"><a class="anchor" href="#builing-your-iot-application"></a>Builing your IOT Application</h2>
-<div class="sectionbody">
-
+<div class="ulist">
+<ul>
+<li>
+<p>Backend Application - Any application created by the FlashLex user that is responsible for sending messages to things, querying and processing collection data from the thing and managing state of the thing. Must authenticate and use tokens to make REST calls to the FlashLex Cloud API.</p>
+</li>
+<li>
+<p>IOT Application - The application created by the FlashLex user, installed on the thing, which handles incoming messages, collects data and publishes collection events, and updates the device state.</p>
+</li>
+<li>
+<p>Flashlex Cloud API</p>
+</li>
+<li>
+<p>Flashlex Client SDK</p>
+</li>
+<li>
+<p>Collection Topic</p>
+</li>
+<li>
+<p>Thing Topic</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </article>
   </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+  <p>Copyright FlashLex 2019</p>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script src="../../_/js/vendor/highlight.js"></script>
