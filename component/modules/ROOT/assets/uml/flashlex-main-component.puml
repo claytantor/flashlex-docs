@@ -1,0 +1,38 @@
+@startuml flashlex-main-component
+
+
+
+
+
+
+package "User Cloud" {
+[IOT Backend] as [Backend]
+}
+
+package "FlashLex Cloud" {
+[Flashlex Cloud API] as [API]
+[Collection Topic] as [tCollect]
+[Thing Topic] as [tThing]
+[Thing Shadow] as [Shadow]
+}
+
+package "Thing" {
+[IOT Application] as [App]
+[Flashlex Client SDK] as [SDK]
+}
+
+
+
+[Backend]-->[API]
+
+[App]-->[SDK]
+
+[SDK]-->[tCollect]
+[SDK]-->[tThing]
+[SDK]-->[Shadow]
+
+[API]-->[tCollect]
+[API]-->[tThing]
+[API]-->[Shadow]
+
+@enduml

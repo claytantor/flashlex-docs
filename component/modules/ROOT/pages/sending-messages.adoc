@@ -1,0 +1,19 @@
+= Sending Messages To Your Thing
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+
+== Overview
+image::flashlex-send-use.png[send usecase]
+
+== How Does My Backend Send Messages?
+How Does My Thing Application Use The SDK Send Messages
+
+== How Does My Thing Application Use The SDK To Recieve Messages?
+How Does My Thing Application Use The SDK Send Messages
+
+
+

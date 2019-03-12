@@ -86,3 +86,6 @@ build/*
 build/
 out/
 out/*
+
+.idea/
+.idea/*

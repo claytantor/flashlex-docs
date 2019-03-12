@@ -1,0 +1,10 @@
+= Introduction To Shadows
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+
+A shadow is a virtual representation of your thing. Use it to update the state of the thing with the REST API.
+

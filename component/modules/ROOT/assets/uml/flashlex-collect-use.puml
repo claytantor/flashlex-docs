@@ -1,0 +1,24 @@
+@startuml flashlex-collect-usecase
+
+:IOT Device: as Thing
+:IOT Backend: as IOTBackend
+:FlashLex Cloud API: as API
+:FlashLex SDK: as SDK
+
+Thing->(Runs IOT Application)
+
+SDK-->(Publish To Collection Topic)
+SDK-->(Persist Collection Events)
+
+IOTBackend-->(Query Collection Events\nFrom API)
+IOTBackend-->(Drop Collection Events\nFrom API)
+IOTBackend-->(Manage Access Tokens)
+
+API-->(Expire Stale Collection Events)
+API-->(Manage Access Tokens)
+API-->(Persist Collection Events)
+
+(Runs IOT Application)-->(Publish To Collection Topic)
+
+
+@enduml

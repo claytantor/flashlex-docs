@@ -1,0 +1,15 @@
+@startuml flashlex-main-usecase
+:Backend Application (system): as Backend
+:IOT Application (system): as Thing
+ 
+Backend-->(Send Messages\nUsing REST API)
+Backend-->(Query and Collect Thing Events\nUsing REST API)
+Backend-->(Manage Thing Shadow) 
+
+Thing-->(Recieve Message Events\nfrom Client SDK)
+Thing-->(On Message Event\nDo Custom Activity)
+Thing-->(Collect Data)
+Thing-->(Publish Collection Event\nUsing Client SDK)
+Thing-->(Manage Thing Shadow) 
+
+@enduml
