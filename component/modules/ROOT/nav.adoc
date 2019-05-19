@@ -4,3 +4,10 @@
 * xref:shadow-intro.adoc[Intro To Shadows]
 * Site
 ** xref:site/registration.adoc[Registration]
+* API
+** xref:api/index.adoc[Overview]
+** xref:api/paths.adoc[Paths]
+** xref:api/security.adoc[Security]
+
+
+

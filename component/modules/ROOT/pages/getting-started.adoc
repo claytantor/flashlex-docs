@@ -8,6 +8,11 @@ endif::[]
 
 This is the Getting Started page for version *{page-component-version}* of FlashLex.
 
+== How It Works
+The Flashlex platform is an internet gateway for your thing. It simplifies accessing tour IOT device by providing a simple HTTP REST API to dispatch messages.
+
+image::gs-how-it-works.png[how it works]
+
 
 
 == Provision Your Thing

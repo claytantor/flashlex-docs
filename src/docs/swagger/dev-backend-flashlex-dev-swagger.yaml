@@ -1,0 +1,436 @@
+---
+swagger: "2.0"
+info:
+  version: "2019-05-18T22:08:31Z"
+  title: "dev-backend-flashlex"
+host: "api.flashlex.com"
+basePath: "/dev"
+schemes:
+- "https"
+paths:
+  /payment/{paymentId}:
+    get:
+      parameters:
+      - name: "paymentId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /subscription:
+    get:
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /subscription/active:
+    get:
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /subscription/schedule/{paymentId}:
+    post:
+      parameters:
+      - name: "paymentId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /subscription/{subscriptionId}:
+    get:
+      parameters:
+      - name: "subscriptionId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /subscription/{subscriptionId}/activate:
+    post:
+      parameters:
+      - name: "subscriptionId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /things:
+    get:
+      responses: {}
+      security:
+      - auth: []
+    post:
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /things/{thingId}:
+    get:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    delete:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /things/{thingId}/archive:
+    get:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /things/{thingId}/collect:
+    post:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - verifyThing: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /things/{thingId}/dist:
+    get:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /things/{thingId}/messages:
+    get:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    delete:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /things/{thingId}/metadata:
+    post:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /things/{thingId}/publish:
+    post:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /token:
+    get:
+      responses: {}
+  /users/{sub}:
+    get:
+      parameters:
+      - name: "sub"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      security:
+      - auth: []
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Credentials:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+securityDefinitions:
+  auth:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    x-amazon-apigateway-authtype: "custom"
+  verifyThing:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    x-amazon-apigateway-authtype: "custom"

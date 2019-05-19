@@ -1,0 +1,19 @@
+= dev-backend-flashlex
+
+
+[[_overview]]
+== Overview
+
+=== Version information
+[%hardbreaks]
+__Version__ : 2019-05-18T22:08:31Z
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : api.flashlex.com
+__BasePath__ : /dev
+__Schemes__ : HTTPS
+
+
+
