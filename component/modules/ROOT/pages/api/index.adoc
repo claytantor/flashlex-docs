@@ -8,6 +8,13 @@ endif::[]
 
 == What is the FlashLex API?
 
+[source,bash]
+----
+curl -X GET \
+  https://u100den7gk.execute-api.us-east-1.amazonaws.com/dev/token \
+  -H 'Authorization: Basic k2xLeXRhbnRvcaBnbWFpbC5jb216VGFuZ3k0NUJhdHoh' \
+  -H 'Client-Id: clays-postman'
+----
 
 
 

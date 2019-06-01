@@ -13,3 +13,8 @@ npm run build
 npm run serve
 ```
 
+## pushing the docs 
+```bash
+$ bash iac/bash/copyweb.sh
+```
+

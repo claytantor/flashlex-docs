@@ -1,4 +1,4 @@
-= dev-backend-flashlex
+= flashlex-backend
 
 
 [[_overview]]
@@ -6,13 +6,13 @@
 
 === Version information
 [%hardbreaks]
-__Version__ : 2019-05-18T22:08:31Z
+__Version__ : v1
 
 
 === URI scheme
 [%hardbreaks]
 __Host__ : api.flashlex.com
-__BasePath__ : /dev
+__BasePath__ : /dev/v1
 __Schemes__ : HTTPS
 
 

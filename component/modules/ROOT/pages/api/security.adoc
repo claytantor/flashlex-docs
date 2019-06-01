@@ -10,6 +10,12 @@ __Name__ : Authorization
 __In__ : HEADER
 
 
+[[_basicauth]]
+=== basicAuth
+[%hardbreaks]
+__Type__ : basic
+
+
 [[_verifything]]
 === verifyThing
 [%hardbreaks]

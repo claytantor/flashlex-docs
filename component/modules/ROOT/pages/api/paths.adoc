@@ -2,8 +2,72 @@
 [[_paths]]
 == Paths
 
-[[_payment_paymentid_get]]
-=== GET /payment/{paymentId}
+[[_payments_get]]
+=== Finds the payments for the authorized user
+....
+GET /payments
+....
+
+
+==== Description
+Uses the subject from the auth token to determine payments.
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**event_type** +
+__optional__|the payment type. supported types charge:confirmed|string
+|**Query**|**flstatus** +
+__optional__|the status of linkage, linked or unlinked|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Successful.|<<_restresponsepayments,RestResponsePayments>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* payments
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
+
+
+[[_payments_paymentid_get]]
+=== Finds payment by payment id
+....
+GET /payments/{paymentId}
+....
+
+
+==== Description
+Uses the primary key of the payment to return a specific payment record.
+
 
 ==== Parameters
 
@@ -15,29 +79,13 @@ __required__|string
 |===
 
 
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_payment_paymentid_options]]
-=== OPTIONS /payment/{paymentId}
-
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful payment was found.|<<_restresponsepayment,RestResponsePayment>>
+|**404**|Not Found. The payment was not found.|No Content
 |===
 
 
@@ -51,8 +99,10 @@ __required__|string
 * `application/json`
 
 
-[[_subscription_get]]
-=== GET /subscription
+==== Tags
+
+* payments
+
 
 ==== Security
 
@@ -63,20 +113,23 @@ __required__|string
 |===
 
 
-[[_subscription_options]]
-=== OPTIONS /subscription
+[[_subscriptions_get]]
+=== Finds all subscriptions for the account
+....
+GET /subscriptions
+....
+
+
+==== Description
+Will return all the subscription records for the user account.
+
 
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful subscriptions response.|< <<_restresponsesubscriptions,RestResponseSubscriptions>> > array
 |===
 
 
@@ -90,8 +143,10 @@ __required__|string
 * `application/json`
 
 
-[[_subscription_active_get]]
-=== GET /subscription/active
+==== Tags
+
+* subscriptions
+
 
 ==== Security
 
@@ -102,20 +157,23 @@ __required__|string
 |===
 
 
-[[_subscription_active_options]]
-=== OPTIONS /subscription/active
+[[_subscriptions_active_get]]
+=== Returns the current active subscription and policy.
+....
+GET /subscriptions/active
+....
+
+
+==== Description
+Will return all the active subscription record for the user account and the policy for authorization of activity. Will return free subscription if none has been activated.
+
 
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful response.|<<_restresponsesubscriptionpolicy,RestResponseSubscriptionPolicy>>
 |===
 
 
@@ -129,42 +187,51 @@ __required__|string
 * `application/json`
 
 
-[[_subscription_schedule_paymentid_post]]
-=== POST /subscription/schedule/{paymentId}
+==== Tags
+
+* subscriptions
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
+
+
+[[_subscriptions_schedule_paymentid_post]]
+=== Schedules a payment for scheduled activation.
+....
+POST /subscriptions/schedule/{paymentId}
+....
+
+
+==== Description
+Will created a scheduled subscription from a payment and link the two.
+
 
 ==== Parameters
 
-[options="header", cols=".^2,.^3,.^4"]
+[options="header", cols=".^2,.^3,.^9,.^4"]
 |===
-|Type|Name|Schema
+|Type|Name|Description|Schema
 |**Path**|**paymentId** +
-__required__|string
+__required__||string
+|**Body**|**body** +
+__required__|The schedule being proposed for the payment to be converted. In the form of UTC epoc seconds.|<<_subscriptionschedule,SubscriptionSchedule>>
 |===
 
-
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_subscription_schedule_paymentid_options]]
-=== OPTIONS /subscription/schedule/{paymentId}
 
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful subscriptions response.|< <<_restresponsepaymentsubscription,RestResponsePaymentSubscription>> > array
+|**404**|Not Found. The payment was not found.|No Content
+|**409**|Conflict. The end time of the subscription overlaps with another already scheduled subscription.|No Content
 |===
 
 
@@ -178,8 +245,30 @@ __required__|string
 * `application/json`
 
 
-[[_subscription_subscriptionid_get]]
-=== GET /subscription/{subscriptionId}
+==== Tags
+
+* subscriptions
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
+
+
+[[_subscriptions_subscriptionid_get]]
+=== Return a subscription record by its id.
+....
+GET /subscriptions/{subscriptionId}
+....
+
+
+==== Description
+Will retreive a specific subscription record by its primary key.
+
 
 ==== Parameters
 
@@ -191,29 +280,13 @@ __required__|string
 |===
 
 
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_subscription_subscriptionid_options]]
-=== OPTIONS /subscription/{subscriptionId}
-
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful subscriptions response.|<<_restresponsesubscription,RestResponseSubscription>>
+|**404**|Not Found. The subscription was not found.|No Content
 |===
 
 
@@ -227,8 +300,30 @@ __required__|string
 * `application/json`
 
 
-[[_subscription_subscriptionid_activate_post]]
-=== POST /subscription/{subscriptionId}/activate
+==== Tags
+
+* subscriptions
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
+
+
+[[_subscriptions_subscriptionid_activate_post]]
+=== Will activate a specific paid subscription.
+....
+POST /subscriptions/{subscriptionId}/activate
+....
+
+
+==== Description
+Will activate a scheduled subscription immediately. Will respond with a conflict if a non free subscription is currently active.
+
 
 ==== Parameters
 
@@ -240,29 +335,14 @@ __required__|string
 |===
 
 
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_subscription_subscriptionid_activate_options]]
-=== OPTIONS /subscription/{subscriptionId}/activate
-
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful subscriptions response.|<<_restresponsesubscription,RestResponseSubscription>>
+|**404**|Not Found. The subscription was not found.|No Content
+|**409**|Conflict. There is already an active subscription.|No Content
 |===
 
 
@@ -274,10 +354,67 @@ __required__|string
 ==== Produces
 
 * `application/json`
+
+
+==== Tags
+
+* subscriptions
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
 
 
 [[_things_post]]
-=== POST /things
+=== Creates a new thing.
+....
+POST /things
+....
+
+
+==== Description
+Will create a new thing and all the backend infrastructure required to onboard a new thing.
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**body** +
+__required__|The thing being proposed for the payment to be converted. In the form of UTC epoc seconds.|<<_createthingrequest,CreateThingRequest>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Successful create.|<<_restresponsething,RestResponseThing>>
+|**403**|Forbidden|<<_restresponsesubscriptionpolicy,RestResponseSubscriptionPolicy>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* things
+
 
 ==== Security
 
@@ -289,31 +426,22 @@ __required__|string
 
 
 [[_things_get]]
-=== GET /things
-
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
+=== Finds all things for the account
+....
+GET /things
+....
 
 
-[[_things_options]]
-=== OPTIONS /things
+==== Description
+Will return all the thing records for the user account.
+
 
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful response.|<<_restresponsethings,RestResponseThings>>
 |===
 
 
@@ -327,8 +455,30 @@ __required__|string
 * `application/json`
 
 
+==== Tags
+
+* things
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
+
+
 [[_things_thingid_get]]
-=== GET /things/{thingId}
+=== Return a thing record by its id.
+....
+GET /things/{thingId}
+....
+
+
+==== Description
+Will retreive a specific thing record by its primary key.
+
 
 ==== Parameters
 
@@ -338,6 +488,31 @@ __required__|string
 |**Path**|**thingId** +
 __required__|string
 |===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Successful response.|<<_restresponsething,RestResponseThing>>
+|**404**|Not Found. The thing was not found.|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* things
 
 
 ==== Security
@@ -350,7 +525,15 @@ __required__|string
 
 
 [[_things_thingid_delete]]
-=== DELETE /things/{thingId}
+=== Delete a thing record by its id.
+....
+DELETE /things/{thingId}
+....
+
+
+==== Description
+Will delete a specific thing record by its primary key and orchestrate the removal of all related infrastructure and messages.
+
 
 ==== Parameters
 
@@ -362,29 +545,13 @@ __required__|string
 |===
 
 
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_things_thingid_options]]
-=== OPTIONS /things/{thingId}
-
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful response.|<<_restresponse,RestResponse>>
+|**404**|Not Found. The thing was not found.|No Content
 |===
 
 
@@ -396,19 +563,72 @@ __required__|string
 ==== Produces
 
 * `application/json`
+
+
+==== Tags
+
+* things
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
 
 
 [[_things_thingid_archive_get]]
-=== GET /things/{thingId}/archive
+=== Get messages for a thing as a zip archive.
+....
+GET /things/{thingId}/archive
+....
+
+
+==== Description
+Will get the messages for a thing with the provided query model as a zip archive.
+
 
 ==== Parameters
 
-[options="header", cols=".^2,.^3,.^4"]
+[options="header", cols=".^2,.^3,.^9,.^4"]
 |===
-|Type|Name|Schema
+|Type|Name|Description|Schema
 |**Path**|**thingId** +
-__required__|string
+__required__||string
+|**Query**|**endts** +
+__optional__|end of the query UTC epoc seconds|integer
+|**Query**|**messagetype** +
+__optional__|the type of message, ingress and egress supported|string
+|**Query**|**startts** +
+__optional__|start of the query UTC epoc seconds|integer
 |===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Successful response. Base64 encoded file.|string (byte)
+|**404**|Not Found. The thing was not found.|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/zip`
+
+
+==== Tags
+
+* things
 
 
 ==== Security
@@ -420,20 +640,34 @@ __required__|string
 |===
 
 
-[[_things_thingid_archive_options]]
-=== OPTIONS /things/{thingId}/archive
+[[_things_thingid_collect_post]]
+=== Intended for a thing to send a message to be saved.
+....
+POST /things/{thingId}/collect
+....
+
+
+==== Description
+Will accept a message from a thing using asymetric auth for the thing.
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^4"]
+|===
+|Type|Name|Schema
+|**Path**|**thingId** +
+__required__|string
+|===
+
 
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful response.|<<_restresponsemessagecollection,RestResponseMessageCollection>>
+|**404**|Not Found. The thing was not found.|No Content
 |===
 
 
@@ -447,17 +681,9 @@ __required__|string
 * `application/json`
 
 
-[[_things_thingid_collect_post]]
-=== POST /things/{thingId}/collect
+==== Tags
 
-==== Parameters
-
-[options="header", cols=".^2,.^3,.^4"]
-|===
-|Type|Name|Schema
-|**Path**|**thingId** +
-__required__|string
-|===
+* things
 
 
 ==== Security
@@ -467,33 +693,6 @@ __required__|string
 |Type|Name
 |**apiKey**|**<<_verifything,verifyThing>>**
 |===
-
-
-[[_things_thingid_collect_options]]
-=== OPTIONS /things/{thingId}/collect
-
-==== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
-|===
-
-
-==== Consumes
-
-* `application/json`
-
-
-==== Produces
-
-* `application/json`
 
 
 [[_things_thingid_dist_get]]
@@ -509,6 +708,31 @@ __required__|string
 |===
 
 
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Successful response. Base64 encoded file.|string (byte)
+|**404**|Not Found. The thing was not found.|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/zip`
+
+
+==== Tags
+
+* things
+
+
 ==== Security
 
 [options="header", cols=".^3,.^4"]
@@ -518,20 +742,40 @@ __required__|string
 |===
 
 
-[[_things_thingid_dist_options]]
-=== OPTIONS /things/{thingId}/dist
+[[_things_thingid_messages_get]]
+=== The REST call to get messages for a specific thing.
+....
+GET /things/{thingId}/messages
+....
+
+
+==== Description
+Will retreive the messages for a thing as an rest response.
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**thingId** +
+__required__||string
+|**Query**|**endts** +
+__optional__|end of the query UTC epoc seconds|integer
+|**Query**|**messagetype** +
+__optional__|the type of message, ingress and egress supported|string
+|**Query**|**startts** +
+__optional__|start of the query UTC epoc seconds|integer
+|===
+
 
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful response.|<<_restresponsemessages,RestResponseMessages>>
+|**404**|Not Found. The thing was not found.|No Content
 |===
 
 
@@ -543,19 +787,12 @@ __required__|string
 ==== Produces
 
 * `application/json`
+* `application/zip`
 
 
-[[_things_thingid_messages_get]]
-=== GET /things/{thingId}/messages
+==== Tags
 
-==== Parameters
-
-[options="header", cols=".^2,.^3,.^4"]
-|===
-|Type|Name|Schema
-|**Path**|**thingId** +
-__required__|string
-|===
+* things
 
 
 ==== Security
@@ -568,41 +805,39 @@ __required__|string
 
 
 [[_things_thingid_messages_delete]]
-=== DELETE /things/{thingId}/messages
+=== The REST call to delete messages for a specific thing.
+....
+DELETE /things/{thingId}/messages
+....
+
+
+==== Description
+Will delete the messages for a thing with the provided query model.
+
 
 ==== Parameters
 
-[options="header", cols=".^2,.^3,.^4"]
+[options="header", cols=".^2,.^3,.^9,.^4"]
 |===
-|Type|Name|Schema
+|Type|Name|Description|Schema
 |**Path**|**thingId** +
-__required__|string
+__required__||string
+|**Query**|**endts** +
+__optional__|end of the query UTC epoc seconds|integer
+|**Query**|**messagetype** +
+__optional__|the type of message, ingress and egress supported|string
+|**Query**|**startts** +
+__optional__|start of the query UTC epoc seconds|integer
 |===
 
-
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_things_thingid_messages_options]]
-=== OPTIONS /things/{thingId}/messages
 
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful delete.|<<_restresponse,RestResponse>>
+|**404**|Not Found. The thing was not found.|No Content
 |===
 
 
@@ -616,17 +851,9 @@ __required__|string
 * `application/json`
 
 
-[[_things_thingid_metadata_post]]
-=== POST /things/{thingId}/metadata
+==== Tags
 
-==== Parameters
-
-[options="header", cols=".^2,.^3,.^4"]
-|===
-|Type|Name|Schema
-|**Path**|**thingId** +
-__required__|string
-|===
+* things
 
 
 ==== Security
@@ -636,33 +863,6 @@ __required__|string
 |Type|Name
 |**apiKey**|**<<_auth,auth>>**
 |===
-
-
-[[_things_thingid_metadata_options]]
-=== OPTIONS /things/{thingId}/metadata
-
-==== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
-|===
-
-
-==== Consumes
-
-* `application/json`
-
-
-==== Produces
-
-* `application/json`
 
 
 [[_things_thingid_publish_post]]
@@ -678,29 +878,13 @@ __required__|string
 |===
 
 
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_things_thingid_publish_options]]
-=== OPTIONS /things/{thingId}/publish
-
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful response.|<<_restresponse,RestResponse>>
+|**404**|Not Found. The thing was not found.|No Content
 |===
 
 
@@ -714,8 +898,55 @@ __required__|string
 * `application/json`
 
 
+==== Tags
+
+* things
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
+
+
 [[_token_get]]
 === GET /token
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Successful response.|<<_flashlexlogin,FlashLexLogin>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/zip`
+
+
+==== Tags
+
+* auth
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**basic**|**<<_basicauth,basicAuth>>**
+|===
+
 
 [[_users_sub_get]]
 === GET /users/{sub}
@@ -730,29 +961,13 @@ __required__|string
 |===
 
 
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_users_sub_options]]
-=== OPTIONS /users/{sub}
-
 ==== Responses
 
 [options="header", cols=".^2,.^14,.^4"]
 |===
 |HTTP Code|Description|Schema
-|**200**|200 response +
-**Headers** :  +
-`Access-Control-Allow-Origin` (string) +
-`Access-Control-Allow-Methods` (string) +
-`Access-Control-Allow-Credentials` (string) +
-`Access-Control-Allow-Headers` (string)|No Content
+|**200**|Successful response.|<<_restresponseuser,RestResponseUser>>
+|**404**|Not Found. The thing was not found.|No Content
 |===
 
 
@@ -764,6 +979,20 @@ __required__|string
 ==== Produces
 
 * `application/json`
+
+
+==== Tags
+
+* users
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_auth,auth>>**
+|===
 
 
 

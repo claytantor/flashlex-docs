@@ -1,2 +1,477 @@
 
+[[_definitions]]
+== Definitions
+
+[[_createthingrequest]]
+=== CreateThingRequest
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**flthingspk** +
+__required__|**Example** : `"8fe28087-5cc9-4c2d-a04d-1cf5fcff8f3e"`|string
+|===
+
+
+[[_flashlexlogin]]
+=== FlashLexLogin
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**accessToken** +
+__required__|**Example** : `"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"`|string
+|===
+
+
+[[_keyvalue]]
+=== KeyValue
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**key** +
+__required__|**Example** : `"message"`|string
+|**value** +
+__required__|**Example** : `"This is something helpful."`|string
+|===
+
+
+[[_message]]
+=== Message
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**datecreated** +
+__required__|**Example** : `"2019-05-25T22:45:24Z"`|string
+|**flmessagespk** +
+__required__|**Example** : `"02eff3d7-6e3f-4d91-aeb9-20cacd0d2a46"`|string
+|**flthingspk** +
+__required__|**Example** : `"48338542-9866-4046-9ecc-ad74e1807cc5"`|string
+|**fltimestamp** +
+__required__|**Example** : `1558824554`|integer
+|**fluserspk** +
+__required__|**Example** : `"1cd13b12-6d91-4e8e-9156-60e451a3c975"`|string
+|**messagetype** +
+__required__|**Example** : `"ingress"`|string
+|===
+
+
+[[_payment]]
+=== Payment
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**datecreated** +
+__optional__|**Example** : `"2019-05-25T22:45:24Z"`|string
+|**event_type** +
+__required__|**Example** : `"charge:confirmed"`|string
+|**flpaymentspk** +
+__required__|**Example** : `"9cbfb4e4-9738-4bd1-ab5a-34cd67cc90e0"`|string
+|**flstatus** +
+__required__|**Example** : `"linked"`|string
+|**flsubscriptionspk** +
+__optional__|**Example** : `"46c8af5f-308b-4ab6-a938-c4cc3209c73c"`|string
+|**fltimestamp** +
+__required__|**Example** : `1558824554`|integer
+|**fluserspk** +
+__required__|**Example** : `"ecd13b11-6d91-4e8e-9156-60e451a3c975"`|string
+|**payment_id** +
+__required__|**Example** : `"1VW52122JL8272417"`|string
+|**product_name** +
+__required__|**Example** : `"Flashlex Sapphire 30"`|string
+|**product_sku** +
+__required__|**Example** : `"SUBSAP101"`|string
+|**txbody** +
+__optional__||object
+|===
+
+
+[[_paymentsubscription]]
+=== PaymentSubscription
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**payment** +
+__required__|<<_payment,Payment>>
+|**subscription** +
+__required__|<<_subscription,Subscription>>
+|===
+
+
+[[_policy]]
+=== Policy
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**Statement** +
+__required__|< <<_policystatement,PolicyStatement>> > array
+|===
+
+
+[[_policystatement]]
+=== PolicyStatement
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**Action** +
+__required__|**Example** : `"flashex:createThing"`|string
+|**ActualCount** +
+__optional__|**Example** : `3`|integer
+|**AllowedCount** +
+__optional__|**Example** : `1`|integer
+|**Effect** +
+__required__|**Example** : `"Deny"`|string
+|**Resource** +
+__required__|**Example** : `"ecd13b11-6d91-4e8e-9156-60e451a3c975:thing:*"`|string
+|===
+
+
+[[_restresponse]]
+=== RestResponse
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**code** +
+__required__|integer
+|**messages** +
+__required__|< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__|object
+|**status** +
+__required__|string
+|===
+
+
+[[_restresponsemessage]]
+=== RestResponseMessage
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||<<_message,Message>>
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsemessagecollection]]
+=== RestResponseMessageCollection
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||<<_restresponsemessagecollection_result,result>>
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+[[_restresponsemessagecollection_result]]
+**result**
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**flmessagespk** +
+__optional__|**Example** : `"8f913dc2-3865-46fb-b078-059ff6974bcb"`|string
+|**flthingspk** +
+__optional__|**Example** : `"48338542-9866-4046-9ecc-ad74e1807cc5"`|string
+|**message** +
+__optional__|**Example** : `"Message Collected"`|string
+|===
+
+
+[[_restresponsemessages]]
+=== RestResponseMessages
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||< <<_message,Message>> > array
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsepayment]]
+=== RestResponsePayment
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||<<_payment,Payment>>
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsepaymentsubscription]]
+=== RestResponsePaymentSubscription
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||<<_paymentsubscription,PaymentSubscription>>
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsepayments]]
+=== RestResponsePayments
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||< <<_payment,Payment>> > array
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsesubscription]]
+=== RestResponseSubscription
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||<<_subscription,Subscription>>
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsesubscriptionpolicy]]
+=== RestResponseSubscriptionPolicy
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||<<_subscriptionpolicy,SubscriptionPolicy>>
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsesubscriptions]]
+=== RestResponseSubscriptions
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||< <<_subscription,Subscription>> > array
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsething]]
+=== RestResponseThing
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||<<_thing,Thing>>
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponsethings]]
+=== RestResponseThings
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||< <<_thing,Thing>> > array
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_restresponseuser]]
+=== RestResponseUser
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer
+|**messages** +
+__required__||< <<_keyvalue,KeyValue>> > array
+|**result** +
+__required__||<<_user,User>>
+|**status** +
+__required__|**Example** : `"OK"`|string
+|===
+
+
+[[_subscription]]
+=== Subscription
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**common_name** +
+__required__|**Example** : `"SAPPHIRE"`|string
+|**datecreated** +
+__optional__|**Example** : `"2019-05-25T22:45:24Z"`|string
+|**endts** +
+__required__|**Example** : `1571092033`|integer
+|**flpaymentspk** +
+__optional__|**Example** : `"31580dc7-bf78-464e-a639-297bf144c628"`|string
+|**flstatus** +
+__required__|**Example** : `"scheduled"`|string
+|**flsubscriptionspk** +
+__optional__|**Example** : `"46c8af5f-308b-4ab6-a938-c4cc3209c73c"`|string
+|**fltimestamp** +
+__optional__|**Example** : `1558824554`|integer
+|**fluserspk** +
+__optional__|**Example** : `"ecd13b11-6d91-4e8e-9156-60e451a3c975"`|string
+|**payment_code** +
+__optional__|**Example** : `"1VW52122JL8272417"`|string
+|**product_name** +
+__required__|**Example** : `"Flashlex Sapphire 30"`|string
+|**startts** +
+__required__|**Example** : `1571094037`|integer
+|===
+
+
+[[_subscriptionpolicy]]
+=== SubscriptionPolicy
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**policy** +
+__required__|<<_policy,Policy>>
+|**subscription** +
+__required__|<<_subscription,Subscription>>
+|===
+
+
+[[_subscriptionschedule]]
+=== SubscriptionSchedule
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**endts** +
+__required__|**Example** : `1571094037`|integer
+|===
+
+
+[[_thing]]
+=== Thing
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**certificateId** +
+__required__|**Example** : `"dc73c46d2d70629ed4ce92d41a98e2cccb2836beb1ab04788f3c7a7bc0629cf2"`|string
+|**certificatePem** +
+__required__|**Example** : `"-----BEGIN CERTIFICATE-----\nMIIDWTCCAkGgAwIBAgIUSMb6t+9DeEzaSt7tTZoCxCa+EzcwDQYJKoZIhvcNAQEL\nBQAwTTFLMEkGA1UECwxCQW1hem9uIFdlYiBTZXJ2aWNlcyBPPUFtYXpvbi5jb20g\nSW5jLiBMPVNlYXR0bGUgU1Q9V2FzaGluZ3RvbiBDPVVTMB4XDTE5MDUyMzAwNTc0\nM1oXDTQ5MTIzMTIzNTk1OVowHjEcMBoGA1UEAwwTQVdTIElvVCBDZXJ0aWZpY2F0\nZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANIvSuy6I8h42GHxM8M6\nXoIV8ZsYQyoIpAmfd1RFs+EIbLqzGYXzuhzHbJuXBFraivLpnzapY04g44ZMIz34A\nmpwaEDpie8QJvfzm3WO/OfFqyT7+Lgn9/KRNxGzBlrPu8LWH1kkd5jsXvNfhumW7\nhmAAzwPvYxqDKNx84mUVhQHv8CAg+co0yTLDwkqJ1zM6zogyRiY02R5/oS3h\n-----END CERTIFICATE-----\n"`|string
+|**datecreated** +
+__required__|**Example** : `"2019-05-25T22:45:24Z"`|string
+|**flthingspk** +
+__required__|**Example** : `"8fe28087-5cc9-4c2d-a04d-1cf5fcff8f3e"`|string
+|**fltimestamp** +
+__required__|**Example** : `1558824554`|integer
+|**fluserspk** +
+__required__|**Example** : `"a1333b61-87cb-4156-c018-b0ea304d879f"`|string
+|**keyPairPrivate** +
+__required__|**Example** : `"-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEA0i9K7LojyHjYYfEzwzpeghXxmxhDKgikCZ93VEWxiojn5EyI\nieINFWJHNDHuOOlzN9uJCrMMVrQDnzegNdqZo6XMaEfFAqmrZJ6esH0U1w55PLZg\nu+/HRaZsyHloHDvldc/CrQMBhG3iNb3l4AJI6EmDAfY13FPE0kWERHYp96YwOkEL\n6CI0IXb6Av8D/eukuC/FSQrrbn34NDCIlm4pQ8ZMRg\nqDDG6tigW4Wmz/RMBtgcG7q48zc5fGYA9hREs6zmzNFzgVOJNblRmZTZ7fjtGHQu\nTAqlAoGAUsxThpkmsP6uD6RFBaiQV7DHwlagy+osXjSETFdnKs+pn5sT/t0iaqAj\nOWDij+hSu6z6uw/PP4PTAIzacYXLe/LHuAEZa2P4Rbl66qxHr51dY/h+SG48dkWR\ncZ1EMJ0I7/9MwH2gNyvC0RApwMcaCRK82My1mCGjo+t+Wd1C4PE=\n-----END RSA PRIVATE KEY-----\n"`|string
+|**keyPairPublic** +
+__required__|**Example** : `"-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0i9K7LojyHjYYfEzwzpe\nghXxmxhDKgikCZ93VEWxiojn5EyIieINFWJHNDHuOOlzN9uJCrMMVrQDnzegNdqZ\no6XMaEfFAqmrZJ6esH0U1w55PLZgmZlXpjqhPgj3w1WzuNipCVHrt9m08OuCvTZ01ZhkYrZ9\nfxj47jz27uFM/aa60Fz/B00Y0yJHZijoYJWgu/ejgO8YxEh6yJ1T+1NvGOHdchn/\nRwIDAQAB\n-----END PUBLIC KEY-----\n"`|string
+|**testStatus** +
+__required__|**Example** : `"CREATED"`|string
+|**thingDist** +
+__required__|**Example** : `"Python"`|string
+|**thingName** +
+__required__|**Example** : `"a1333b61-palooza"`|string
+|**thingType** +
+__required__|**Example** : `"RasberryPi"`|string
+|===
+
+
+[[_user]]
+=== User
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**datecreated** +
+__required__|**Example** : `"2019-05-25T22:45:24Z"`|string
+|**emailverified** +
+__required__|**Example** : `true`|boolean
+|**fltimestamp** +
+__required__|**Example** : `1558824554`|integer
+|**fluserspk** +
+__required__|**Example** : `"02eff3d7-6e3f-4d91-aeb9-20cacd0d2a46"`|string
+|**username** +
+__required__|**Example** : `"roo@foobar.com"`|string
+|===
+
+
 

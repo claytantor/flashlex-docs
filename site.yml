@@ -1,6 +1,6 @@
 site:
   title: FlashLex Documentation
-  start_page: component-getting-started::index.adoc 
+  start_page: flashlex-docs::index.adoc
 content:
   sources:
   - url: .

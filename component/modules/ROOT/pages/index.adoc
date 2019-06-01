@@ -6,8 +6,22 @@ endif::[]
 :idprefix:
 :idseparator: -
 
+== TL;DR?
+
+Not interested in the details? Then goto our link:getting-started.html[Getting Started Guide] to get going quickly.
+
 == What is FlashLex?
-FlashLex is an internet gateway for the internet of things. It provides a simple way to access your IOT enabled device using our REST API and installed distribution SDK bundles. Using our platform makes your device capabile of recieving and publishing IOT messages in minutes. The FlashLex platform provides a simple consistent way for your backed to route published messages made via REST API calls using a secure access token to a topic subscribed by your thing, gives your backend control over the state of all your IOT fleet and provides a persistent queriable store for the collection of data published by your things.   
+
+FlashLex is an internet gateway for the internet of things. It simplifies accessing tour IOT device by providing a simple HTTP REST API to dispatch messages.
+
+image::gs-how-it-works.png[how it works]
+
+- FlashLex App & API - The SaaS Internet Gateway for all your things. FlashLex is responsible for managing your things, storing messages for retrieval and coordination your services.
+- The Thing - A thing is a small computer that you would like to either send messages to or collect messages from on the internet.
+- Dispatch Application - Sends or collects messages across all your things. It orchestrates communication between multiple things.
+
+It provides a simple way to access your IOT enabled device using our REST API and installed distribution SDK bundles. Using our platform makes your device capable of recieving and publishing IOT messages in minutes. The FlashLex platform provides a simple consistent way for your backed to route published messages made via REST API calls using a secure access token to a topic subscribed by your thing, gives your backend control over the state of all your IOT fleet and provides a persistent queriable store for the collection of data published by your things.
+
 FlashLex gives the IOT developer a simple messaging platform in the cloud so they can focus on building great things. This is accomplished by downloading the FlashLex Client SDK of their choice distribution and installing it on the thing. The IOT developer then can write their custom application code using the FlashLex Client SDK in the distribution. 
 
 NOTE: Current language support for the SDK is limited to Python.
@@ -29,6 +43,9 @@ image::flashlex-main-component.png[main component]
 * Flashlex Client SDK
 * Collection Topic
 * Thing Topic
+
+
+
 
 
 
