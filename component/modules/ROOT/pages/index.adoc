@@ -12,7 +12,7 @@ Not interested in the details? Then goto our link:getting-started.html[Getting S
 
 == What is FlashLex?
 
-FlashLex is an internet gateway for the internet of things. It simplifies accessing tour IOT device by providing a simple HTTP REST API to dispatch messages.
+FlashLex is an internet gateway for the internet of things. It simplifies accessing your IOT device by providing a simple HTTP REST API to dispatch messages.
 
 image::gs-how-it-works.png[how it works]
 

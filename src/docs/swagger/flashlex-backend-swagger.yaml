@@ -1,0 +1,886 @@
+---
+swagger: "2.0"
+info:
+  version: "v1"
+  title: "flashlex-backend"
+host: "api.flashlex.com"
+basePath: "/v1"
+schemes:
+- "https"
+paths:
+
+  /subscriptions:
+    get:
+      summary: Finds all subscriptions for the account
+      description: Will return all the subscription records for the user account.  
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"    
+      tags:
+      - subscriptions  
+      responses:
+        '200':
+          description: "Successful subscriptions response."
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RestResponseSubscriptions'  
+      security:
+      - auth: []
+
+  /subscriptions/active:
+    get:
+      summary: Returns the current active subscription and policy. 
+      description: Will return all the active subscription record for the user account and the policy for authorization of activity. Will return free subscription if none has been activated.    
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"       
+      tags:
+      - subscriptions    
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/RestResponseSubscriptionPolicy'  
+      security:
+      - auth: []
+
+  /subscriptions/{subscriptionId}:
+    get:
+      summary: Return a subscription record by its id.
+      description: Will retreive a specific subscription record by its primary key.
+      parameters:
+      - name: "subscriptionId"
+        in: "path"
+        required: true
+        type: "string"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"       
+      tags:
+      - subscriptions    
+      responses:
+        '200':
+          description: "Successful subscriptions response."
+          schema:
+            $ref: '#/definitions/RestResponseSubscription'  
+        '404':
+          description: "Not Found. The subscription was not found."          
+      security:
+      - auth: []
+
+  /things:
+    get:
+      summary: Finds all things for the account
+      description: Will return all the thing records for the user account.  
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"    
+      tags:
+      - things    
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/RestResponseThings'  
+      security:
+      - auth: []  
+    post:
+      summary: Creates a new thing.
+      description: Will create a new thing and all the backend infrastructure required to onboard a new thing.
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"  
+      tags:
+      - things       
+      parameters:    
+      - in: body
+        name: body
+        description: The thing being proposed for the payment to be converted. In the form of UTC epoc seconds.
+        required: true
+        schema:
+          $ref: '#/definitions/CreateThingRequest'
+      responses:
+        '200':
+          description: "Successful create."
+          schema:
+            $ref: '#/definitions/RestResponseThing' 
+        '403':
+          description: "Forbidden"
+          schema:
+            $ref: '#/definitions/RestResponseSubscriptionPolicy'
+            
+      security:
+      - auth: []
+
+  /things/{thingId}:
+    get:
+      summary: Return a thing record by its id.
+      description: Will retreive a specific thing record by its primary key.
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"       
+      tags:
+      - things    
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/RestResponseThing'  
+        '404':
+          description: "Not Found. The thing was not found."          
+      security:
+      - auth: []
+    delete:
+      summary: Delete a thing record by its id.
+      description: Will delete a specific thing record by its primary key and orchestrate the removal of all related infrastructure and messages.
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"       
+      tags:
+      - things    
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/RestResponse'  
+        '404':
+          description: "Not Found. The thing was not found."          
+      security:
+      - auth: []    
+      
+
+  /things/{thingId}/messages:
+    get:
+      summary: The REST call to get messages for a specific thing.
+      description: Will retreive the messages for a thing as an rest response.    
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+        
+      - in: query
+        name: startts
+        type: "integer"
+        required: false
+        description: start of the query UTC epoc seconds
+
+      - in: query
+        name: endts
+        type: "integer"
+        required: false
+        description: end of the query UTC epoc seconds
+        
+      - in: query
+        name: messagetype
+        type: "string"
+        required: false
+        description: the type of message, ingress and egress supported
+        
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"  
+      tags:
+      - things    
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/RestResponseMessages'  
+        '404':
+          description: "Not Found. The thing was not found."         
+      security:
+      - auth: []
+    delete:
+      summary: The REST call to delete messages for a specific thing.
+      description: Will delete the messages for a thing with the provided query model.   
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+        
+      - in: query
+        name: startts
+        type: "integer"
+        required: false
+        description: start of the query UTC epoc seconds
+
+      - in: query
+        name: endts
+        type: "integer"
+        required: false
+        description: end of the query UTC epoc seconds
+        
+      - in: query
+        name: messagetype
+        type: "string"
+        required: false
+        description: the type of message, ingress and egress supported
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"  
+      tags:
+      - things            
+      responses:
+        '200':
+          description: "Successful delete."
+          schema:
+            $ref: '#/definitions/RestResponse'  
+        '404':
+          description: "Not Found. The thing was not found."  
+      security:
+      - auth: []
+  
+  /things/{thingId}/archive:
+    get:
+      summary: Get messages for a thing as a zip archive. 
+      description: Will get the messages for a thing with the provided query model as a zip archive.
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+        
+      - in: query
+        name: startts
+        type: "integer"
+        required: false
+        description: start of the query UTC epoc seconds
+
+      - in: query
+        name: endts
+        type: "integer"
+        required: false
+        description: end of the query UTC epoc seconds
+        
+      - in: query
+        name: messagetype
+        type: "string"
+        required: false
+        description: the type of message, ingress and egress supported
+        
+      consumes:
+      - "application/json"
+      produces:
+      - "application/zip"
+      tags:
+      - things    
+      responses:
+        '200':
+          description: "Successful response. Base64 encoded file."
+          schema:
+            type: string
+            format: byte
+        '404':
+          description: "Not Found. The thing was not found."         
+      security:
+      - auth: []
+
+  /things/{thingId}/collect:
+    post:
+      summary: Intended for a thing to send a message to be saved. 
+      description: Will accept a message from a thing using asymetric auth for the thing.    
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"  
+      tags:
+      - things    
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/RestResponseMessageCollection'  
+        '404':
+          description: "Not Found. The thing was not found."  
+      security:
+      - verifyThing: []
+
+  /things/{thingId}/dist:
+    get:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/zip"       
+      tags:
+      - things    
+      responses:
+        '200':
+          description: "Successful response. Base64 encoded file."
+          schema:
+            type: string
+            format: byte
+        '404':
+          description: "Not Found. The thing was not found."   
+      security:
+      - auth: []
+
+  /things/{thingId}/publish:
+    post:
+      parameters:
+      - name: "thingId"
+        in: "path"
+        required: true
+        type: "string"
+
+      - in: body
+        name: body
+        description: The message body being sent to the thing, can be JSON or free form text.
+        required: true
+        schema:
+          type: string
+          example: 'FOO|BAR|This is a message.'
+
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"  
+      tags:
+      - things    
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/RestResponse'  
+        '404':
+          description: "Not Found. The thing was not found." 
+      security:
+      - auth: []
+
+  /token:
+    get:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/zip"       
+      tags:
+      - auth        
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/FlashLexLogin'  
+      security:
+      - basicAuth: []
+  
+  /users/{sub}:
+    get:
+      parameters:
+      - name: "sub"
+        in: "path"
+        required: true
+        type: "string"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"       
+      tags:
+      - users    
+      responses:
+        '200':
+          description: "Successful response."
+          schema:
+            $ref: '#/definitions/RestResponseUser'  
+        '404':
+          description: "Not Found. The thing was not found."   
+      security:
+      - auth: []
+
+definitions:
+  RestResponse:
+    type: object
+    properties:
+      status:
+        type: string
+      code:
+        type: integer
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        type: object
+    required:
+      - status
+      - code
+      - messages
+      - result
+
+  KeyValue:
+    type: object
+    properties:
+      key:
+        type: string
+        example: "message"
+      value:
+        type: string
+        example: "This is something helpful."
+    required:
+      - key
+      - value
+
+      
+  RestResponseSubscriptions:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        type: array
+        items:
+          $ref: '#/definitions/Subscription'
+    required:
+      - status
+      - code
+      - messages
+      - result
+
+  RestResponseSubscription:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        $ref: '#/definitions/Subscription'
+    required:
+      - status
+      - code
+      - messages
+      - result
+  
+  RestResponseSubscriptionPolicy:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        $ref: '#/definitions/SubscriptionPolicy'
+    required:
+      - status
+      - code
+      - messages
+      - result
+        
+  SubscriptionPolicy:
+    type: object
+    properties:
+      subscription:
+        $ref: '#/definitions/Subscription'
+      policy:
+        $ref: '#/definitions/Policy'
+    required:
+      - subscription
+      - policy
+        
+  Subscription:
+    type: object
+    properties:
+      flsubscriptionspk:
+        type: string
+        example: "46c8af5f-308b-4ab6-a938-c4cc3209c73c"
+      fltimestamp: 
+        type: integer
+        example: 1558824554
+      datecreated:
+        type: string
+        example: "2019-05-25T22:45:24Z"   
+      common_name: 
+        type: string
+        example: "SAPPHIRE"
+      startts:
+        type: integer
+        example:  1571094037
+      endts: 
+        type: integer 
+        example: 1571092033
+      flstatus:
+        type: string
+        example: "scheduled"
+      fluserspk:
+        type: string
+        example: "ecd13b11-6d91-4e8e-9156-60e451a3c975"
+      product_id:
+        type: string
+        example: "prod_FGB5V9qSzP6f3R"
+      plan_id:
+        type: string
+        example: "plan_FGBe9MHTfmOxiG"
+      plan_name:
+        type: string
+        example: "Flashlex Sapphire 30"
+
+    required:
+      - common_name
+      - startts  
+      - endts
+      - flstatus
+      - plan_name
+        
+  RestResponseThing:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        $ref: '#/definitions/Thing'
+    required:
+      - status
+      - code
+      - messages
+      - result
+
+  RestResponseThings:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        type: array
+        items:
+          $ref: '#/definitions/Thing'
+    required:
+      - status
+      - code
+      - messages
+      - result
+
+  CreateThingRequest:
+    type: object
+    properties:
+      flthingspk:
+        type: string
+        example: "8fe28087-5cc9-4c2d-a04d-1cf5fcff8f3e"
+    required:
+      - flthingspk
+        
+  Thing:
+    type: object
+    properties:
+      flthingspk:
+        type: string
+        example: "8fe28087-5cc9-4c2d-a04d-1cf5fcff8f3e"
+      fltimestamp: 
+        type: integer
+        example: 1558824554
+      datecreated:
+        type: string
+        example: "2019-05-25T22:45:24Z"   
+      certificateId:
+        type: string
+        example: "dc73c46d2d70629ed4ce92d41a98e2cccb2836beb1ab04788f3c7a7bc0629cf2"
+      fluserspk:
+        type: string
+        example:  "a1333b61-87cb-4156-c018-b0ea304d879f"  
+      certificatePem:
+        type: string
+        example:  "-----BEGIN CERTIFICATE-----\nMIIDWTCCAkGgAwIBAgIUSMb6t+9DeEzaSt7tTZoCxCa+EzcwDQYJKoZIhvcNAQEL\nBQAwTTFLMEkGA1UECwxCQW1hem9uIFdlYiBTZXJ2aWNlcyBPPUFtYXpvbi5jb20g\nSW5jLiBMPVNlYXR0bGUgU1Q9V2FzaGluZ3RvbiBDPVVTMB4XDTE5MDUyMzAwNTc0\nM1oXDTQ5MTIzMTIzNTk1OVowHjEcMBoGA1UEAwwTQVdTIElvVCBDZXJ0aWZpY2F0\nZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANIvSuy6I8h42GHxM8M6\nXoIV8ZsYQyoIpAmfd1RFs+EIbLqzGYXzuhzHbJuXBFraivLpnzapY04g44ZMIz34A\nmpwaEDpie8QJvfzm3WO/OfFqyT7+Lgn9/KRNxGzBlrPu8LWH1kkd5jsXvNfhumW7\nhmAAzwPvYxqDKNx84mUVhQHv8CAg+co0yTLDwkqJ1zM6zogyRiY02R5/oS3h\n-----END CERTIFICATE-----\n"
+      keyPairPrivate:
+        type: string
+        example: "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEA0i9K7LojyHjYYfEzwzpeghXxmxhDKgikCZ93VEWxiojn5EyI\nieINFWJHNDHuOOlzN9uJCrMMVrQDnzegNdqZo6XMaEfFAqmrZJ6esH0U1w55PLZg\nu+/HRaZsyHloHDvldc/CrQMBhG3iNb3l4AJI6EmDAfY13FPE0kWERHYp96YwOkEL\n6CI0IXb6Av8D/eukuC/FSQrrbn34NDCIlm4pQ8ZMRg\nqDDG6tigW4Wmz/RMBtgcG7q48zc5fGYA9hREs6zmzNFzgVOJNblRmZTZ7fjtGHQu\nTAqlAoGAUsxThpkmsP6uD6RFBaiQV7DHwlagy+osXjSETFdnKs+pn5sT/t0iaqAj\nOWDij+hSu6z6uw/PP4PTAIzacYXLe/LHuAEZa2P4Rbl66qxHr51dY/h+SG48dkWR\ncZ1EMJ0I7/9MwH2gNyvC0RApwMcaCRK82My1mCGjo+t+Wd1C4PE=\n-----END RSA PRIVATE KEY-----\n"
+      keyPairPublic:
+        type: string
+        example: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0i9K7LojyHjYYfEzwzpe\nghXxmxhDKgikCZ93VEWxiojn5EyIieINFWJHNDHuOOlzN9uJCrMMVrQDnzegNdqZ\no6XMaEfFAqmrZJ6esH0U1w55PLZgmZlXpjqhPgj3w1WzuNipCVHrt9m08OuCvTZ01ZhkYrZ9\nfxj47jz27uFM/aa60Fz/B00Y0yJHZijoYJWgu/ejgO8YxEh6yJ1T+1NvGOHdchn/\nRwIDAQAB\n-----END PUBLIC KEY-----\n"
+      testStatus:
+        type: string
+        example: "CREATED"
+      thingDist:
+        type: string
+        example: "Python"
+      thingName:
+        type: string
+        example: "a1333b61-palooza"
+      thingType:
+        type: string
+        example: "RasberryPi"
+    required:
+      - flthingspk
+      - fltimestamp
+      - datecreated   
+      - certificateId
+      - fluserspk  
+      - certificatePem
+      - keyPairPrivate
+      - keyPairPublic
+      - testStatus
+      - thingDist
+      - thingName
+      - thingType    
+
+  RestResponseMessages:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        type: array
+        items:
+          $ref: '#/definitions/Message'
+    required:
+      - status
+      - code
+      - messages
+      - result  
+
+  RestResponseMessage:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        $ref: '#/definitions/Message'
+    required:
+      - status
+      - code
+      - messages
+      - result       
+
+  RestResponseMessageCollection:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        type: object
+        properties:
+          message:
+            type: string
+            example: "Message Collected"
+          flthingspk:
+            type: string
+            example: "48338542-9866-4046-9ecc-ad74e1807cc5"
+          flmessagespk: 
+            type: string
+            example: "8f913dc2-3865-46fb-b078-059ff6974bcb"
+    required:
+      - status
+      - code
+      - messages
+      - result    
+          
+  Message:
+    type: object
+    properties:
+      flmessagespk:
+        type: string
+        example: "02eff3d7-6e3f-4d91-aeb9-20cacd0d2a46"
+      fltimestamp: 
+        type: integer
+        example: 1558824554
+      datecreated:
+        type: string
+        example: "2019-05-25T22:45:24Z" 
+      flthingspk:
+        type: string
+        example: "48338542-9866-4046-9ecc-ad74e1807cc5"
+      fluserspk:
+        type: string
+        example: "1cd13b12-6d91-4e8e-9156-60e451a3c975"
+      messagetype: 
+        type: string
+        example: "ingress"
+    required:
+      - flmessagespk
+      - fltimestamp
+      - datecreated
+      - flthingspk
+      - fluserspk
+      - messagetype
+        
+  FlashLexLogin:
+    type: object
+    properties:
+      accessToken:
+        type: string
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    required:
+      - accessToken
+ 
+  RestResponseUser:
+    type: object
+    properties:
+      status:
+        type: string
+        example: "OK"
+      code:
+        type: integer
+        example: 200
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/KeyValue'
+      result:
+        $ref: '#/definitions/User'  
+    required:
+      - status
+      - code
+      - messages
+      - result
+
+  User:
+    type: object
+    properties:
+      fluserspk:
+        type: string
+        example: "02eff3d7-6e3f-4d91-aeb9-20cacd0d2a46"
+      fltimestamp: 
+        type: integer
+        example: 1558824554
+      datecreated:
+        type: string
+        example: "2019-05-25T22:45:24Z" 
+      emailverified:
+        type: boolean 
+        example: true
+      username:
+        type: string
+        example: "roo@foobar.com"
+    required:
+    - fluserspk
+    - fltimestamp
+    - datecreated
+    - emailverified
+    - username
+
+  
+  Policy:
+    type: object
+    properties:
+      Statement:
+        type: array
+        items:
+          $ref: '#/definitions/PolicyStatement'
+    required:
+    - Statement
+          
+  PolicyStatement:
+    type: object
+    properties:
+      Action:
+        type: string
+        example: "flashex:createThing"
+      Effect:
+        type: string
+        example: "Deny"
+      Resource:
+        type: string
+        example: "ecd13b11-6d91-4e8e-9156-60e451a3c975:thing:*"
+      AllowedCount:
+        type: integer
+        example: 1
+      ActualCount:
+        type: integer
+        example: 3
+    required:
+    - Action
+    - Effect
+    - Resource
+
+securityDefinitions:
+  basicAuth:
+    type: basic
+  auth:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    x-amazon-apigateway-authtype: "custom"
+  verifyThing:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    x-amazon-apigateway-authtype: "custom"
+   

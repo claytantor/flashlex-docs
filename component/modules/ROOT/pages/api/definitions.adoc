@@ -58,50 +58,6 @@ __required__|**Example** : `"ingress"`|string
 |===
 
 
-[[_payment]]
-=== Payment
-
-[options="header", cols=".^3,.^11,.^4"]
-|===
-|Name|Description|Schema
-|**datecreated** +
-__optional__|**Example** : `"2019-05-25T22:45:24Z"`|string
-|**event_type** +
-__required__|**Example** : `"charge:confirmed"`|string
-|**flpaymentspk** +
-__required__|**Example** : `"9cbfb4e4-9738-4bd1-ab5a-34cd67cc90e0"`|string
-|**flstatus** +
-__required__|**Example** : `"linked"`|string
-|**flsubscriptionspk** +
-__optional__|**Example** : `"46c8af5f-308b-4ab6-a938-c4cc3209c73c"`|string
-|**fltimestamp** +
-__required__|**Example** : `1558824554`|integer
-|**fluserspk** +
-__required__|**Example** : `"ecd13b11-6d91-4e8e-9156-60e451a3c975"`|string
-|**payment_id** +
-__required__|**Example** : `"1VW52122JL8272417"`|string
-|**product_name** +
-__required__|**Example** : `"Flashlex Sapphire 30"`|string
-|**product_sku** +
-__required__|**Example** : `"SUBSAP101"`|string
-|**txbody** +
-__optional__||object
-|===
-
-
-[[_paymentsubscription]]
-=== PaymentSubscription
-
-[options="header", cols=".^3,.^4"]
-|===
-|Name|Schema
-|**payment** +
-__required__|<<_payment,Payment>>
-|**subscription** +
-__required__|<<_subscription,Subscription>>
-|===
-
-
 [[_policy]]
 === Policy
 
@@ -209,57 +165,6 @@ __required__|**Example** : `200`|integer
 __required__||< <<_keyvalue,KeyValue>> > array
 |**result** +
 __required__||< <<_message,Message>> > array
-|**status** +
-__required__|**Example** : `"OK"`|string
-|===
-
-
-[[_restresponsepayment]]
-=== RestResponsePayment
-
-[options="header", cols=".^3,.^11,.^4"]
-|===
-|Name|Description|Schema
-|**code** +
-__required__|**Example** : `200`|integer
-|**messages** +
-__required__||< <<_keyvalue,KeyValue>> > array
-|**result** +
-__required__||<<_payment,Payment>>
-|**status** +
-__required__|**Example** : `"OK"`|string
-|===
-
-
-[[_restresponsepaymentsubscription]]
-=== RestResponsePaymentSubscription
-
-[options="header", cols=".^3,.^11,.^4"]
-|===
-|Name|Description|Schema
-|**code** +
-__required__|**Example** : `200`|integer
-|**messages** +
-__required__||< <<_keyvalue,KeyValue>> > array
-|**result** +
-__required__||<<_paymentsubscription,PaymentSubscription>>
-|**status** +
-__required__|**Example** : `"OK"`|string
-|===
-
-
-[[_restresponsepayments]]
-=== RestResponsePayments
-
-[options="header", cols=".^3,.^11,.^4"]
-|===
-|Name|Description|Schema
-|**code** +
-__required__|**Example** : `200`|integer
-|**messages** +
-__required__||< <<_keyvalue,KeyValue>> > array
-|**result** +
-__required__||< <<_payment,Payment>> > array
 |**status** +
 __required__|**Example** : `"OK"`|string
 |===
@@ -379,8 +284,6 @@ __required__|**Example** : `"SAPPHIRE"`|string
 __optional__|**Example** : `"2019-05-25T22:45:24Z"`|string
 |**endts** +
 __required__|**Example** : `1571092033`|integer
-|**flpaymentspk** +
-__optional__|**Example** : `"31580dc7-bf78-464e-a639-297bf144c628"`|string
 |**flstatus** +
 __required__|**Example** : `"scheduled"`|string
 |**flsubscriptionspk** +
@@ -389,10 +292,12 @@ __optional__|**Example** : `"46c8af5f-308b-4ab6-a938-c4cc3209c73c"`|string
 __optional__|**Example** : `1558824554`|integer
 |**fluserspk** +
 __optional__|**Example** : `"ecd13b11-6d91-4e8e-9156-60e451a3c975"`|string
-|**payment_code** +
-__optional__|**Example** : `"1VW52122JL8272417"`|string
-|**product_name** +
+|**plan_id** +
+__optional__|**Example** : `"plan_FGBe9MHTfmOxiG"`|string
+|**plan_name** +
 __required__|**Example** : `"Flashlex Sapphire 30"`|string
+|**product_id** +
+__optional__|**Example** : `"prod_FGB5V9qSzP6f3R"`|string
 |**startts** +
 __required__|**Example** : `1571094037`|integer
 |===
@@ -408,17 +313,6 @@ __required__|**Example** : `1571094037`|integer
 __required__|<<_policy,Policy>>
 |**subscription** +
 __required__|<<_subscription,Subscription>>
-|===
-
-
-[[_subscriptionschedule]]
-=== SubscriptionSchedule
-
-[options="header", cols=".^3,.^11,.^4"]
-|===
-|Name|Description|Schema
-|**endts** +
-__required__|**Example** : `1571094037`|integer
 |===
 
 

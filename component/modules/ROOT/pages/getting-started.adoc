@@ -10,11 +10,11 @@ This is the Getting Started page for version *{page-component-version}* of Flash
 
 This abridged guide assumes the following:
 
-* You have already registered and didnt really need any help from documentation to do it.
+* You have registered. Go to the <<register.adoc#,register for flashlex>> docs for more info. 
 * You want the code mostly, and are trying to just prove that you can send a message to a thing on the internet.
 
 == How It Works
-The Flashlex platform is an internet gateway for your thing. It simplifies accessing tour IOT device by providing a simple HTTP REST API to dispatch messages.
+The Flashlex platform is an internet gateway for your thing. It simplifies accessing your IOT device by providing a simple HTTP REST API to dispatch messages.
 
 image::gs-how-it-works.png[how it works]
 
@@ -24,7 +24,6 @@ image::gs-how-it-works.png[how it works]
 
 This guide will show you in the simplest terms:
 
-1. How to register for FlashLex.
 1. How to provision a new thing.
 1. How to download and install the SDK on your thing.
 1. How to bootstrap the Thing SDK.

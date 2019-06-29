@@ -22,7 +22,7 @@ asciidoctor {
 }
 
 convertSwagger2markup {
-    swaggerInput file("src/docs/swagger/dev-backend-flashlex-dev-swagger.yaml").getAbsolutePath()
+    swaggerInput file("src/docs/swagger/dev-flashlex-backend-swagger.yaml").getAbsolutePath()
     outputDir file("component/modules/ROOT/pages/api")
     config = ['swagger2markup.markupLanguage' : 'ASCIIDOC']
 }

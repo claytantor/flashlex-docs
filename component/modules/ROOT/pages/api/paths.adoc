@@ -2,117 +2,6 @@
 [[_paths]]
 == Paths
 
-[[_payments_get]]
-=== Finds the payments for the authorized user
-....
-GET /payments
-....
-
-
-==== Description
-Uses the subject from the auth token to determine payments.
-
-
-==== Parameters
-
-[options="header", cols=".^2,.^3,.^9,.^4"]
-|===
-|Type|Name|Description|Schema
-|**Query**|**event_type** +
-__optional__|the payment type. supported types charge:confirmed|string
-|**Query**|**flstatus** +
-__optional__|the status of linkage, linked or unlinked|string
-|===
-
-
-==== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|Successful.|<<_restresponsepayments,RestResponsePayments>>
-|===
-
-
-==== Consumes
-
-* `application/json`
-
-
-==== Produces
-
-* `application/json`
-
-
-==== Tags
-
-* payments
-
-
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_payments_paymentid_get]]
-=== Finds payment by payment id
-....
-GET /payments/{paymentId}
-....
-
-
-==== Description
-Uses the primary key of the payment to return a specific payment record.
-
-
-==== Parameters
-
-[options="header", cols=".^2,.^3,.^4"]
-|===
-|Type|Name|Schema
-|**Path**|**paymentId** +
-__required__|string
-|===
-
-
-==== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|Successful payment was found.|<<_restresponsepayment,RestResponsePayment>>
-|**404**|Not Found. The payment was not found.|No Content
-|===
-
-
-==== Consumes
-
-* `application/json`
-
-
-==== Produces
-
-* `application/json`
-
-
-==== Tags
-
-* payments
-
-
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
 [[_subscriptions_get]]
 === Finds all subscriptions for the account
 ....
@@ -201,64 +90,6 @@ Will return all the active subscription record for the user account and the poli
 |===
 
 
-[[_subscriptions_schedule_paymentid_post]]
-=== Schedules a payment for scheduled activation.
-....
-POST /subscriptions/schedule/{paymentId}
-....
-
-
-==== Description
-Will created a scheduled subscription from a payment and link the two.
-
-
-==== Parameters
-
-[options="header", cols=".^2,.^3,.^9,.^4"]
-|===
-|Type|Name|Description|Schema
-|**Path**|**paymentId** +
-__required__||string
-|**Body**|**body** +
-__required__|The schedule being proposed for the payment to be converted. In the form of UTC epoc seconds.|<<_subscriptionschedule,SubscriptionSchedule>>
-|===
-
-
-==== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|Successful subscriptions response.|< <<_restresponsepaymentsubscription,RestResponsePaymentSubscription>> > array
-|**404**|Not Found. The payment was not found.|No Content
-|**409**|Conflict. The end time of the subscription overlaps with another already scheduled subscription.|No Content
-|===
-
-
-==== Consumes
-
-* `application/json`
-
-
-==== Produces
-
-* `application/json`
-
-
-==== Tags
-
-* subscriptions
-
-
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
 [[_subscriptions_subscriptionid_get]]
 === Return a subscription record by its id.
 ....
@@ -287,62 +118,6 @@ __required__|string
 |HTTP Code|Description|Schema
 |**200**|Successful subscriptions response.|<<_restresponsesubscription,RestResponseSubscription>>
 |**404**|Not Found. The subscription was not found.|No Content
-|===
-
-
-==== Consumes
-
-* `application/json`
-
-
-==== Produces
-
-* `application/json`
-
-
-==== Tags
-
-* subscriptions
-
-
-==== Security
-
-[options="header", cols=".^3,.^4"]
-|===
-|Type|Name
-|**apiKey**|**<<_auth,auth>>**
-|===
-
-
-[[_subscriptions_subscriptionid_activate_post]]
-=== Will activate a specific paid subscription.
-....
-POST /subscriptions/{subscriptionId}/activate
-....
-
-
-==== Description
-Will activate a scheduled subscription immediately. Will respond with a conflict if a non free subscription is currently active.
-
-
-==== Parameters
-
-[options="header", cols=".^2,.^3,.^4"]
-|===
-|Type|Name|Schema
-|**Path**|**subscriptionId** +
-__required__|string
-|===
-
-
-==== Responses
-
-[options="header", cols=".^2,.^14,.^4"]
-|===
-|HTTP Code|Description|Schema
-|**200**|Successful subscriptions response.|<<_restresponsesubscription,RestResponseSubscription>>
-|**404**|Not Found. The subscription was not found.|No Content
-|**409**|Conflict. There is already an active subscription.|No Content
 |===
 
 
@@ -787,7 +562,6 @@ __optional__|start of the query UTC epoc seconds|integer
 ==== Produces
 
 * `application/json`
-* `application/zip`
 
 
 ==== Tags
@@ -870,11 +644,13 @@ __optional__|start of the query UTC epoc seconds|integer
 
 ==== Parameters
 
-[options="header", cols=".^2,.^3,.^4"]
+[options="header", cols=".^2,.^3,.^9,.^4"]
 |===
-|Type|Name|Schema
+|Type|Name|Description|Schema
 |**Path**|**thingId** +
-__required__|string
+__required__||string
+|**Body**|**body** +
+__required__|The message body being sent to the thing, can be JSON or free form text.|string
 |===
 
 

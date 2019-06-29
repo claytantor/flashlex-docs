@@ -1,6 +1,6 @@
 * xref:getting-started.adoc[Getting Started]
-** xref:getting-started.adoc#and-fragment[What is FlashLex?]
-** Register for FlashLex
+* xref:register.adoc[Register For FlashLex]
+* xref:index.adoc[FlashLex Docs]
 ** Provision A Thing
 ** Installing The SDK
 ** Testing Thing Connectivity
@@ -8,10 +8,8 @@
 * Using FlashLex
 ** xref:site/registration.adoc[Registration]
 * FlashLex Gateway API
-** xref:api/index.adoc[Overview]
-** xref:api/paths.adoc[Paths]
-** xref:api/definitions.adoc[Definitions]
-** xref:api/security.adoc[Security]
+** xref:api/index.adoc[API Overview]
+** http://docs.flashlex.com.s3-website-us-east-1.amazonaws.com/flashlex-docs/1.2.dev/swagger/index.html[API Documentation]
 * FlashLex Thing SDK
 ** xref:sending-messages.adoc[Sending Messages]
 ** xref:collecting-messages.adoc[Collecting Messages]

@@ -8,136 +8,42 @@ basePath: "/dev/v1"
 schemes:
 - "https"
 paths:
-  /payments/{paymentId}:
-    get:
-      summary: Finds payment by payment id
-      description: Uses the primary key of the payment to return a specific payment record.
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      tags:
-      - payments
-      parameters:
-      - name: "paymentId"
-        in: "path"
-        required: true
-        type: "string"
-      responses:
-        '200':
-          description: "Successful payment was found."
-          schema:
-            $ref: '#/definitions/RestResponsePayment'
-        '404':
-          description: "Not Found. The payment was not found."
-      security:
-      - auth: []
-
-  /payments:
-    get:
-      summary: Finds the payments for the authorized user
-      description: Uses the subject from the auth token to determine payments.
-      parameters:
-
-      - in: query
-        name: event_type
-        type: "string"
-        required: false
-        description: "the payment type. supported types charge:confirmed"
-
-      - in: query
-        name: flstatus
-        type: "string"
-        required: false
-        description: "the status of linkage, linked or unlinked"
-
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      tags:
-      - payments
-      responses:
-        '200':
-          description: "Successful."
-          schema:
-            $ref: '#/definitions/RestResponsePayments'
-      security:
-      - auth: []
 
   /subscriptions:
     get:
       summary: Finds all subscriptions for the account
-      description: Will return all the subscription records for the user account.
+      description: Will return all the subscription records for the user account.  
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"    
       tags:
-      - subscriptions
+      - subscriptions  
       responses:
         '200':
           description: "Successful subscriptions response."
           schema:
             type: array
             items:
-              $ref: '#/definitions/RestResponseSubscriptions'
+              $ref: '#/definitions/RestResponseSubscriptions'  
       security:
       - auth: []
 
   /subscriptions/active:
     get:
-      summary: Returns the current active subscription and policy.
-      description: Will return all the active subscription record for the user account and the policy for authorization of activity. Will return free subscription if none has been activated.
+      summary: Returns the current active subscription and policy. 
+      description: Will return all the active subscription record for the user account and the policy for authorization of activity. Will return free subscription if none has been activated.    
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"       
       tags:
-      - subscriptions
+      - subscriptions    
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/RestResponseSubscriptionPolicy'
-      security:
-      - auth: []
-
-  /subscriptions/schedule/{paymentId}:
-    post:
-      summary: Schedules a payment for scheduled activation.
-      description: Will created a scheduled subscription from a payment and link the two.
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-
-      parameters:
-      - name: "paymentId"
-        in: "path"
-        required: true
-        type: "string"
-
-      - in: body
-        name: body
-        description: The schedule being proposed for the payment to be converted. In the form of UTC epoc seconds.
-        required: true
-        schema:
-          $ref: '#/definitions/SubscriptionSchedule'
-
-      tags:
-      - subscriptions
-      responses:
-        '200':
-          description: "Successful subscriptions response."
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/RestResponsePaymentSubscription'
-        '404':
-          description: "Not Found. The payment was not found."
-        '409':
-          description: "Conflict. The end time of the subscription overlaps with another already scheduled subscription."
+            $ref: '#/definitions/RestResponseSubscriptionPolicy'  
       security:
       - auth: []
 
@@ -153,73 +59,46 @@ paths:
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"       
       tags:
-      - subscriptions
+      - subscriptions    
       responses:
         '200':
           description: "Successful subscriptions response."
           schema:
-            $ref: '#/definitions/RestResponseSubscription'
+            $ref: '#/definitions/RestResponseSubscription'  
         '404':
-          description: "Not Found. The subscription was not found."
-      security:
-      - auth: []
-
-  /subscriptions/{subscriptionId}/activate:
-    post:
-      summary: Will activate a specific paid subscription.
-      description: Will activate a scheduled subscription immediately. Will respond with a conflict if a non free subscription is currently active.
-      parameters:
-      - name: "subscriptionId"
-        in: "path"
-        required: true
-        type: "string"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      tags:
-      - subscriptions
-      responses:
-        '200':
-          description: "Successful subscriptions response."
-          schema:
-            $ref: '#/definitions/RestResponseSubscription'
-        '404':
-          description: "Not Found. The subscription was not found."
-        '409':
-          description: "Conflict. There is already an active subscription."
+          description: "Not Found. The subscription was not found."          
       security:
       - auth: []
 
   /things:
     get:
       summary: Finds all things for the account
-      description: Will return all the thing records for the user account.
+      description: Will return all the thing records for the user account.  
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"    
       tags:
-      - things
+      - things    
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/RestResponseThings'
+            $ref: '#/definitions/RestResponseThings'  
       security:
-      - auth: []
+      - auth: []  
     post:
       summary: Creates a new thing.
       description: Will create a new thing and all the backend infrastructure required to onboard a new thing.
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"  
       tags:
-      - things
-      parameters:
+      - things       
+      parameters:    
       - in: body
         name: body
         description: The thing being proposed for the payment to be converted. In the form of UTC epoc seconds.
@@ -230,12 +109,12 @@ paths:
         '200':
           description: "Successful create."
           schema:
-            $ref: '#/definitions/RestResponseThing'
+            $ref: '#/definitions/RestResponseThing' 
         '403':
           description: "Forbidden"
           schema:
             $ref: '#/definitions/RestResponseSubscriptionPolicy'
-
+            
       security:
       - auth: []
 
@@ -251,16 +130,16 @@ paths:
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"       
       tags:
-      - things
+      - things    
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/RestResponseThing'
+            $ref: '#/definitions/RestResponseThing'  
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found."          
       security:
       - auth: []
     delete:
@@ -274,30 +153,30 @@ paths:
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"       
       tags:
-      - things
+      - things    
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/RestResponse'
+            $ref: '#/definitions/RestResponse'  
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found."          
       security:
-      - auth: []
-
+      - auth: []    
+      
 
   /things/{thingId}/messages:
     get:
       summary: The REST call to get messages for a specific thing.
-      description: Will retreive the messages for a thing as an rest response.
+      description: Will retreive the messages for a thing as an rest response.    
       parameters:
       - name: "thingId"
         in: "path"
         required: true
         type: "string"
-
+        
       - in: query
         name: startts
         type: "integer"
@@ -309,38 +188,37 @@ paths:
         type: "integer"
         required: false
         description: end of the query UTC epoc seconds
-
+        
       - in: query
         name: messagetype
         type: "string"
         required: false
         description: the type of message, ingress and egress supported
-
+        
       consumes:
       - "application/json"
       produces:
-      - "application/json"
-      - "application/zip"
+      - "application/json"  
       tags:
-      - things
+      - things    
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/RestResponseMessages'
+            $ref: '#/definitions/RestResponseMessages'  
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found."         
       security:
       - auth: []
     delete:
       summary: The REST call to delete messages for a specific thing.
-      description: Will delete the messages for a thing with the provided query model.
+      description: Will delete the messages for a thing with the provided query model.   
       parameters:
       - name: "thingId"
         in: "path"
         required: true
         type: "string"
-
+        
       - in: query
         name: startts
         type: "integer"
@@ -352,7 +230,7 @@ paths:
         type: "integer"
         required: false
         description: end of the query UTC epoc seconds
-
+        
       - in: query
         name: messagetype
         type: "string"
@@ -361,29 +239,29 @@ paths:
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"  
       tags:
-      - things
+      - things            
       responses:
         '200':
           description: "Successful delete."
           schema:
-            $ref: '#/definitions/RestResponse'
+            $ref: '#/definitions/RestResponse'  
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found."  
       security:
       - auth: []
-
+  
   /things/{thingId}/archive:
     get:
-      summary: Get messages for a thing as a zip archive.
+      summary: Get messages for a thing as a zip archive. 
       description: Will get the messages for a thing with the provided query model as a zip archive.
       parameters:
       - name: "thingId"
         in: "path"
         required: true
         type: "string"
-
+        
       - in: query
         name: startts
         type: "integer"
@@ -395,19 +273,19 @@ paths:
         type: "integer"
         required: false
         description: end of the query UTC epoc seconds
-
+        
       - in: query
         name: messagetype
         type: "string"
         required: false
         description: the type of message, ingress and egress supported
-
+        
       consumes:
       - "application/json"
       produces:
       - "application/zip"
       tags:
-      - things
+      - things    
       responses:
         '200':
           description: "Successful response. Base64 encoded file."
@@ -415,14 +293,14 @@ paths:
             type: string
             format: byte
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found."         
       security:
       - auth: []
 
   /things/{thingId}/collect:
     post:
-      summary: Intended for a thing to send a message to be saved.
-      description: Will accept a message from a thing using asymetric auth for the thing.
+      summary: Intended for a thing to send a message to be saved. 
+      description: Will accept a message from a thing using asymetric auth for the thing.    
       parameters:
       - name: "thingId"
         in: "path"
@@ -431,16 +309,16 @@ paths:
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"  
       tags:
-      - things
+      - things    
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/RestResponseMessageCollection'
+            $ref: '#/definitions/RestResponseMessageCollection'  
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found."  
       security:
       - verifyThing: []
 
@@ -454,9 +332,9 @@ paths:
       consumes:
       - "application/json"
       produces:
-      - "application/zip"
+      - "application/zip"       
       tags:
-      - things
+      - things    
       responses:
         '200':
           description: "Successful response. Base64 encoded file."
@@ -464,7 +342,7 @@ paths:
             type: string
             format: byte
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found."   
       security:
       - auth: []
 
@@ -475,41 +353,47 @@ paths:
         in: "path"
         required: true
         type: "string"
+
+      - in: body
+        name: body
+        description: The message body being sent to the thing, can be JSON or free form text.
+        required: true
+        schema:
+          type: string
+          example: 'FOO|BAR|This is a message.'
+
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"  
       tags:
-      - things
+      - things    
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/RestResponse'
+            $ref: '#/definitions/RestResponse'  
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found." 
       security:
       - auth: []
-
-
-# curl -X GET "https://api.flashlex.com/v1/token" -H "accept: application/zip" -H "authorization: Basic Y2xheXRhbnRvckBnbWFpbC5jb206VGFuZ3k0NUJhdHoh"
 
   /token:
     get:
       consumes:
       - "application/json"
       produces:
-      - "application/zip"
+      - "application/zip"       
       tags:
-      - auth
+      - auth        
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/FlashLexLogin'
+            $ref: '#/definitions/FlashLexLogin'  
       security:
       - basicAuth: []
-
+  
   /users/{sub}:
     get:
       parameters:
@@ -520,16 +404,16 @@ paths:
       consumes:
       - "application/json"
       produces:
-      - "application/json"
+      - "application/json"       
       tags:
-      - users
+      - users    
       responses:
         '200':
           description: "Successful response."
           schema:
-            $ref: '#/definitions/RestResponseUser'
+            $ref: '#/definitions/RestResponseUser'  
         '404':
-          description: "Not Found. The thing was not found."
+          description: "Not Found. The thing was not found."   
       security:
       - auth: []
 
@@ -566,99 +450,7 @@ definitions:
       - key
       - value
 
-  RestResponsePayment:
-    type: object
-    properties:
-      status:
-        type: string
-        example: "OK"
-      code:
-        type: integer
-        example: 200
-      messages:
-        type: array
-        items:
-          $ref: '#/definitions/KeyValue'
-      result:
-        $ref: '#/definitions/Payment'
-    required:
-      - status
-      - code
-      - messages
-      - result
-
-  RestResponsePayments:
-    type: object
-    properties:
-      status:
-        type: string
-        example: "OK"
-      code:
-        type: integer
-        example: 200
-      messages:
-        type: array
-        items:
-          $ref: '#/definitions/KeyValue'
-      result:
-        type: array
-        items:
-          $ref: '#/definitions/Payment'
-    required:
-      - status
-      - code
-      - messages
-      - result
-
-  Payment:
-    type: object
-    properties:
-      flpaymentspk:
-        type: string
-        example: "9cbfb4e4-9738-4bd1-ab5a-34cd67cc90e0"
-      fltimestamp:
-        type: integer
-        example: 1558824554
-      datecreated:
-        type: string
-        example: "2019-05-25T22:45:24Z"
-      # email:
-      #   type: string
-      #   example: "foobar@flashlex.com"
-      event_type:
-        type: string
-        example: "charge:confirmed"
-      flstatus:
-        type: string
-        example: "linked"
-      flsubscriptionspk:
-        type: string
-        example: "46c8af5f-308b-4ab6-a938-c4cc3209c73c"
-      fluserspk:
-        type: string
-        example: "ecd13b11-6d91-4e8e-9156-60e451a3c975"
-      payment_id:
-        type: string
-        example: "1VW52122JL8272417"
-      product_name:
-        type: string
-        example: "Flashlex Sapphire 30"
-      product_sku:
-        type: string
-        example: "SUBSAP101"
-      txbody:
-        type: object
-    required:
-      - flpaymentspk
-      - fltimestamp
-      # - email
-      - event_type
-      - flstatus
-      - fluserspk
-      - payment_id
-      - product_name
-      - product_sku
-
+      
   RestResponseSubscriptions:
     type: object
     properties:
@@ -702,7 +494,7 @@ definitions:
       - code
       - messages
       - result
-
+  
   RestResponseSubscriptionPolicy:
     type: object
     properties:
@@ -723,7 +515,7 @@ definitions:
       - code
       - messages
       - result
-
+        
   SubscriptionPolicy:
     type: object
     properties:
@@ -734,95 +526,51 @@ definitions:
     required:
       - subscription
       - policy
-
+        
   Subscription:
     type: object
     properties:
       flsubscriptionspk:
         type: string
         example: "46c8af5f-308b-4ab6-a938-c4cc3209c73c"
-      fltimestamp:
+      fltimestamp: 
         type: integer
         example: 1558824554
       datecreated:
         type: string
-        example: "2019-05-25T22:45:24Z"
-      common_name:
+        example: "2019-05-25T22:45:24Z"   
+      common_name: 
         type: string
         example: "SAPPHIRE"
-      # datestart:
-      #   type: string
-      #   example: "2019-09-14T22:27:13Z"
-      endts:
+      startts:
         type: integer
+        example:  1571094037
+      endts: 
+        type: integer 
         example: 1571092033
-      flpaymentspk:
-        type: string
-        example: "31580dc7-bf78-464e-a639-297bf144c628"
       flstatus:
         type: string
         example: "scheduled"
       fluserspk:
         type: string
         example: "ecd13b11-6d91-4e8e-9156-60e451a3c975"
-      payment_code:
+      product_id:
         type: string
-        example: "1VW52122JL8272417"
-      product_name:
+        example: "prod_FGB5V9qSzP6f3R"
+      plan_id:
+        type: string
+        example: "plan_FGBe9MHTfmOxiG"
+      plan_name:
         type: string
         example: "Flashlex Sapphire 30"
-      startts:
-        type: integer
-        example:  1571094037
+
     required:
       - common_name
+      - startts  
       - endts
       - flstatus
-      - product_name
-      - startts
-
-
-  SubscriptionSchedule:
-    type: object
-    properties:
-      endts:
-        type: integer
-        example:  1571094037
-    required:
-      - endts
-
-  RestResponsePaymentSubscription:
-    type: object
-    properties:
-      status:
-        type: string
-        example: "OK"
-      code:
-        type: integer
-        example: 200
-      messages:
-        type: array
-        items:
-          $ref: '#/definitions/KeyValue'
-      result:
-        $ref: '#/definitions/PaymentSubscription'
-    required:
-      - status
-      - code
-      - messages
-      - result
-
-  PaymentSubscription:
-    type: object
-    properties:
-      payment:
-        $ref: '#/definitions/Payment'
-      subscription:
-        $ref: '#/definitions/Subscription'
-    required:
-      - payment
-      - subscription
-
+      - plan_name
+        
   RestResponseThing:
     type: object
     properties:
@@ -875,25 +623,25 @@ definitions:
         example: "8fe28087-5cc9-4c2d-a04d-1cf5fcff8f3e"
     required:
       - flthingspk
-
+        
   Thing:
     type: object
     properties:
       flthingspk:
         type: string
         example: "8fe28087-5cc9-4c2d-a04d-1cf5fcff8f3e"
-      fltimestamp:
+      fltimestamp: 
         type: integer
         example: 1558824554
       datecreated:
         type: string
-        example: "2019-05-25T22:45:24Z"
+        example: "2019-05-25T22:45:24Z"   
       certificateId:
         type: string
         example: "dc73c46d2d70629ed4ce92d41a98e2cccb2836beb1ab04788f3c7a7bc0629cf2"
       fluserspk:
         type: string
-        example:  "a1333b61-87cb-4156-c018-b0ea304d879f"
+        example:  "a1333b61-87cb-4156-c018-b0ea304d879f"  
       certificatePem:
         type: string
         example:  "-----BEGIN CERTIFICATE-----\nMIIDWTCCAkGgAwIBAgIUSMb6t+9DeEzaSt7tTZoCxCa+EzcwDQYJKoZIhvcNAQEL\nBQAwTTFLMEkGA1UECwxCQW1hem9uIFdlYiBTZXJ2aWNlcyBPPUFtYXpvbi5jb20g\nSW5jLiBMPVNlYXR0bGUgU1Q9V2FzaGluZ3RvbiBDPVVTMB4XDTE5MDUyMzAwNTc0\nM1oXDTQ5MTIzMTIzNTk1OVowHjEcMBoGA1UEAwwTQVdTIElvVCBDZXJ0aWZpY2F0\nZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANIvSuy6I8h42GHxM8M6\nXoIV8ZsYQyoIpAmfd1RFs+EIbLqzGYXzuhzHbJuXBFraivLpnzapY04g44ZMIz34A\nmpwaEDpie8QJvfzm3WO/OfFqyT7+Lgn9/KRNxGzBlrPu8LWH1kkd5jsXvNfhumW7\nhmAAzwPvYxqDKNx84mUVhQHv8CAg+co0yTLDwkqJ1zM6zogyRiY02R5/oS3h\n-----END CERTIFICATE-----\n"
@@ -918,16 +666,16 @@ definitions:
     required:
       - flthingspk
       - fltimestamp
-      - datecreated
+      - datecreated   
       - certificateId
-      - fluserspk
+      - fluserspk  
       - certificatePem
       - keyPairPrivate
       - keyPairPublic
       - testStatus
       - thingDist
       - thingName
-      - thingType
+      - thingType    
 
   RestResponseMessages:
     type: object
@@ -950,7 +698,7 @@ definitions:
       - status
       - code
       - messages
-      - result
+      - result  
 
   RestResponseMessage:
     type: object
@@ -971,7 +719,7 @@ definitions:
       - status
       - code
       - messages
-      - result
+      - result       
 
   RestResponseMessageCollection:
     type: object
@@ -995,34 +743,34 @@ definitions:
           flthingspk:
             type: string
             example: "48338542-9866-4046-9ecc-ad74e1807cc5"
-          flmessagespk:
+          flmessagespk: 
             type: string
             example: "8f913dc2-3865-46fb-b078-059ff6974bcb"
     required:
       - status
       - code
       - messages
-      - result
-
+      - result    
+          
   Message:
     type: object
     properties:
       flmessagespk:
         type: string
         example: "02eff3d7-6e3f-4d91-aeb9-20cacd0d2a46"
-      fltimestamp:
+      fltimestamp: 
         type: integer
         example: 1558824554
       datecreated:
         type: string
-        example: "2019-05-25T22:45:24Z"
+        example: "2019-05-25T22:45:24Z" 
       flthingspk:
         type: string
         example: "48338542-9866-4046-9ecc-ad74e1807cc5"
       fluserspk:
         type: string
         example: "1cd13b12-6d91-4e8e-9156-60e451a3c975"
-      messagetype:
+      messagetype: 
         type: string
         example: "ingress"
     required:
@@ -1032,7 +780,7 @@ definitions:
       - flthingspk
       - fluserspk
       - messagetype
-
+        
   FlashLexLogin:
     type: object
     properties:
@@ -1041,7 +789,7 @@ definitions:
         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
     required:
       - accessToken
-
+ 
   RestResponseUser:
     type: object
     properties:
@@ -1056,7 +804,7 @@ definitions:
         items:
           $ref: '#/definitions/KeyValue'
       result:
-        $ref: '#/definitions/User'
+        $ref: '#/definitions/User'  
     required:
       - status
       - code
@@ -1069,14 +817,14 @@ definitions:
       fluserspk:
         type: string
         example: "02eff3d7-6e3f-4d91-aeb9-20cacd0d2a46"
-      fltimestamp:
+      fltimestamp: 
         type: integer
         example: 1558824554
       datecreated:
         type: string
-        example: "2019-05-25T22:45:24Z"
+        example: "2019-05-25T22:45:24Z" 
       emailverified:
-        type: boolean
+        type: boolean 
         example: true
       username:
         type: string
@@ -1088,7 +836,7 @@ definitions:
     - emailverified
     - username
 
-
+  
   Policy:
     type: object
     properties:
@@ -1098,7 +846,7 @@ definitions:
           $ref: '#/definitions/PolicyStatement'
     required:
     - Statement
-
+          
   PolicyStatement:
     type: object
     properties:
@@ -1137,4 +885,4 @@ securityDefinitions:
     name: "Authorization"
     in: "header"
     x-amazon-apigateway-authtype: "custom"
-
+   

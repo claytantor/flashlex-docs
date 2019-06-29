@@ -1,0 +1,43 @@
+= Register For FlashLex
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+
+This is the Registration page for version *{page-component-version}* of FlashLex.
+
+= Register With FlashLex
+The first thing to do to use FlashLex is register with the service so you can use it for free and get started.
+
+NOTE: Register with an email address you can use for both verification and subscription notifications.
+
+== Register with an email that can be verified using the register form.
+image::register-form.png[resister]
+Response On Submit: `You have successfully submitted your registration form. Look in your email for a verification code and Verify Your Account`
+
+You will then be sent an email with the verification code to be used.
+
+`Your verification code is 195365.`
+
+== Enter your verification code back at FlashLex `/register/verify`
+image::verify-form.png[verify]
+
+Once you have verified your registration is complete.
+
+image::register-completed.png[complete]
+
+You are now able to login.
+
+== Verify Your Email for SES
+Once you verify you will receive another email from Amazon SES. This verification allows Flashlex to send emails to your account. Please
+`Amazon Web Services – Email Address Verification Request in region US East (N. Virginia)`
+
+In that email is a link starting with `https://email-verification.us-east-1.amazonaws.com/`
+
+Please click this link. Once you do you will be directed to a page congratulating you.
+
+image::ses-congrats.png[ses congrats]
+
+NOTE: We will NOT use your email address to spam you, we will only send you reminders or warnings related to your paid service.
