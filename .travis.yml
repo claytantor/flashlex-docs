@@ -13,6 +13,7 @@ branches:
 before_install:
   # set up awscli packages
   - pip install --user awscli
+  - npm install -g spectacle
 
 jobs:
   include:
