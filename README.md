@@ -13,3 +13,5 @@ npm run serve
 $ bash iac/bash/copyweb.sh
 ```
 
+lets see if we can get docs to build.
+
