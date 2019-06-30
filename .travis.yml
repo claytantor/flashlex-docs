@@ -13,7 +13,7 @@ branches:
 before_install:
   # set up awscli packages
   - pip install --user awscli
-  - npm install -g spectacle
+  - npm install -g spectacle-docs
 
 jobs:
   include:
