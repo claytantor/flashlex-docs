@@ -4,11 +4,12 @@
   "description": "docs for the flashlex project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "build_docs": "rm -rvf ./build && $(npm bin)/antora site.yml",
     "build_swagger": "VERSION=$(bash iac/bash/version.sh) SWAGGER_FILE=$(bash iac/bash/swaggerfile.sh) && spectacle --target-dir build/site/flashlex-docs/$VERSION/swagger src/docs/swagger/$SWAGGER_FILE",
     "serve": "$(npm bin)/serve build/site",
-    "buildui": "cd ui && $(npm bin)/gulp bundle && cd .."
+    "buildui": "cd ui && $(npm bin)/gulp bundle && cd ..",
+    "publish": "npm run build_swagger && npm run build_docs && bash iac/bash/copyweb.sh"
   },
   "author": "",
   "license": "ISC",
@@ -40,9 +41,9 @@
     "gulp-stylelint": "~8.0",
     "gulp-uglify": "~3.0",
     "gulp-vinyl-zip": "~2.1 >=2.1.2",
-    "handlebars": "~4.0",
+    "handlebars": "^4.0",
     "highlight.js": "~9.13",
-    "js-yaml": "~3.12",
+    "js-yaml": "^3.12",
     "merge-stream": "~1.0",
     "postcss-calc": "~7.0",
     "postcss-custom-properties": "~8.0",

@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - '8.10'
+
+dist: trusty
+sudo: false
+
+branches:
+  only:
+  - master
+  - dev
+
+before_install:
+  # set up awscli packages
+  - pip install --user awscli
+
+jobs:
+  include:
+    - if: branch = dev
+      env: ENV=dev
+    - if: branch = master
+      env: ENV=prd
+
+cache:
+  directories:
+  - node_modules
+
+script:
+- npm run test
+- npm run publish
