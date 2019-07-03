@@ -1,4 +1,5 @@
-= Sending Messages To Your Thing
+
+== Sending Messages To Your Thing
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -14,6 +15,3 @@ How Does My Thing Application Use The SDK Send Messages
 
 == How Does My Thing Application Use The SDK To Recieve Messages?
 How Does My Thing Application Use The SDK Send Messages
-
-
-

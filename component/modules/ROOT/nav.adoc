@@ -1,13 +1,9 @@
-* xref:getting-started.adoc[Getting Started]
-* xref:register.adoc[Register For FlashLex]
+* xref:getting-started.adoc[Getting Started Woot]
 * xref:index.adoc[FlashLex Docs]
-** Provision A Thing
-** Installing The SDK
-** Testing Thing Connectivity
-** Sending Messages To Your Thing
-* Using FlashLex
-** xref:site/registration.adoc[Registration]
-* FlashLex Gateway API
+** xref:site/index.adoc[FlashLex Site Reference]
+*** xref:site/registration.adoc[Registration]
+*** xref:site/dashboard.adoc[The Dashboard]
+** FlashLex Gateway API
 ** xref:api/index.adoc[API Overview]
 ** http://docs.flashlex.com.s3-website-us-east-1.amazonaws.com/flashlex-docs/1.2.dev/swagger/index.html[API Documentation]
 * FlashLex Thing SDK
