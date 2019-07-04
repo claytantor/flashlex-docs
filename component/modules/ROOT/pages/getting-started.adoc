@@ -10,17 +10,17 @@ This is the Getting Started page for version *{page-component-version}* of Flash
 
 This abridged guide assumes the following:
 
-* You have registered. Go to the <<register.adoc#,register for flashlex>> docs for more info. 
-* You want the code mostly, and are trying to just prove that you can send a message to a thing on the internet.
+* You have registered. Go to the <<site/registration.adoc#,Register for FlashLex>> docs for more info. 
+* You are trying to get the basics that prove that you can send a message to a thing on the internet.
 
 == How It Works
 The Flashlex platform is an internet gateway for your thing. It simplifies accessing your IOT device by providing a simple HTTP REST API to dispatch messages.
 
 image::gs-how-it-works.png[how it works]
 
-- FlashLex App & API - The SaaS Internet Gateway for all your things. FlashLex is responsible for managing your things, storing messages for retrieval and coordination your services.
-- The Thing - A thing is a small computer that you would like to either send messages to or collect messages from on the internet.
-- Dispatch Application - Sends or collects messages across all your things. It orchestrates communication between multiple things.
+- FlashLex Site & API - The SaaS Internet Gateway for all your things. FlashLex is responsible for managing your things, storing messages for retrieval and coordination your services.
+- Your Thing and The FlashLex SDK - A thing is a small computer that you would like to either send messages to or collect messages from on the internet.
+- Your Dispatch Application - Sends or collects messages across all your things. It orchestrates communication between multiple things.
 
 This guide will show you in the simplest terms:
 
@@ -30,39 +30,7 @@ This guide will show you in the simplest terms:
 1. How to Authenticate to the FlashLex API
 1. How to Send a message to your Thing using the FlashLex API
 
-=== Register With FlashLex
-The first thing to do to use FlashLex is register with the service so you can use it for free and get started.
-
-==== Register with an email that can be verified using the register form.
-image::register-form.png[resister]
-Response On Submit: `You have successfully submitted your registration form. Look in your email for a verification code and Verify Your Account`
-
-You will then be sent an email with the verification code to be used.
-
-`Your verification code is 195365.`
-
-==== Enter your verification code back at FlashLex `/register/verify`
-image::verify-form.png[verify]
-
-Once you have verified your registration is complete.
-
-image::register-completed.png[complete]
-
-You are now able to login.
-
-==== Verify Your Email for SES
-Once you verify you will receive another email from Amazon SES. This verification allows Flashlex to send emails to your account. Please
-`Amazon Web Services – Email Address Verification Request in region US East (N. Virginia)`
-
-In that email is a link starting with `https://email-verification.us-east-1.amazonaws.com/`
-
-Please click this link. Once you do you will be directed to a page congratulating you.
-
-image::ses-congrats.png[ses congrats]
-
-NOTE: We will NOT use your email address to spam you, we will only send you reminders or warnings related to your paid service.
-
-=== Provision Your Thing
+= Provision Your Thing
 You will need to provision you thing and download the distribution.
 
 Go to the "Things" Tab to provision a new thing.

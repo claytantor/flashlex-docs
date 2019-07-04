@@ -1,0 +1,23 @@
+= Your FlashLex Dashboard
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+:toc:
+
+The user dashboard is the starting point for you as a FlashLex user to know all the important things about your FlashLex account.
+
+- Your active subscription.
+- A gauge showing how many things you have and how many you are allowed.
+- A gauge showing how many messages have been sent from your thing (egress) and how many are allowed.
+- A gauge showing how many messages have been sent to your thing (ingress) and how many are allowed.
+
+What you are allowed to do is based on your subscription type. For a more detailed explanation of how subscriptions work got to <<site/subscriptions.adoc#,FlashLex Subscriptions>>
+
+= Active Subscription
+
+
+= Thing Gauge
+image::dashboard-thing.png[Things allowed,300,300]

@@ -1,11 +1,11 @@
-
-== Sending Messages To Your Thing
+== FlashLex Things
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 // Settings
 :idprefix:
 :idseparator: -
+:toc:
 
 == Overview
 image::flashlex-send-use.png[send usecase]

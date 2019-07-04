@@ -1,15 +1,18 @@
-* xref:getting-started.adoc[Getting Started Woot]
-* xref:index.adoc[FlashLex Docs]
-** xref:site/index.adoc[FlashLex Site Reference]
-*** xref:site/registration.adoc[Registration]
-*** xref:site/dashboard.adoc[The Dashboard]
-** FlashLex Gateway API
-** xref:api/index.adoc[API Overview]
-** http://docs.flashlex.com.s3-website-us-east-1.amazonaws.com/flashlex-docs/1.2.dev/swagger/index.html[API Documentation]
-* FlashLex Thing SDK
-** xref:sending-messages.adoc[Sending Messages]
-** xref:collecting-messages.adoc[Collecting Messages]
-** The Message Database
+* xref:getting-started.adoc[Getting Started]
+* xref:index.adoc[FlashLex Overview]
+
+.FlashLex Site
+* xref:site/registration.adoc[Registration]
+* xref:site/dashboard.adoc[The Dashboard]
+* xref:site/subscriptions.adoc[Subscriptions]
+
+.FlashLex API Reference
+* xref:api/index.adoc[API Overview]
+* http://docs.flashlex.com.s3-website-us-east-1.amazonaws.com/flashlex-docs/1.2.dev/swagger/index.html[API Documentation]
+
+.FlashLex Thing SDK
+* xref:sending-messages.adoc[Sending Messages]
+* xref:collecting-messages.adoc[Collecting Messages]
 
 
 

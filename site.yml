@@ -6,7 +6,7 @@ content:
   - url: .
     start_path: component
     branches: 
-      - HEAD, dev
+      - dev
       - master
 ui:
   bundle:
