@@ -1,4 +1,4 @@
-== FlashLex Subscriptions
+= FlashLex Subscriptions
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -8,7 +8,60 @@ endif::[]
 :toc:
 
 == How Subscriptions Work
+All subscriptions are monthly, and renewed automatically until you cancel your subscription.
 
-- Amber - Free Susbcription
-- Sapphire - For the weeked warrior
-- Amethyst - Pro package
+== Subscriptions Levels
+Our subscriptions have been priced to eb affordable for the hacker or small business. Wondering if FlashLex is right for you? All of our plans have trial periods and you can use for "forever free" plan as long as you would like to get started.
+
+.FlashLex Subscriptions
+[width="80%",cols="3,^2,10",options="header"]
+|=========================================================
+|Name |Cost |Notes
+
+|AMBER |FREE |
+This is our "forever free" subscription. Want to get started with FlashLex, this is how.
+|SAPPHIRE |$19.00/m|
+If you are a hobbyist hacker this is for you. Build home automation, hydroponics, or just make some cool stuff.
+|SAPPHIRE |$99.00/m|
+If you are a professional prototyping a fleet this is for you. We provide one support and assistance with your project.
+
+|=========================================================
+
+== Amber Subscription
+
+- 1 Thing
+- Up To 1000 Collected Messages
+- Up To 1000 Sent Messages
+- Retain Messages Up to 1 day
+- Gittr Chat Access
+- Documentation Site
+
+== Sapphhire Subscription
+
+- Up To 5 Things
+- Up To 20K Collected Messages
+- Up To 20K Sent Messages
+- Retain Messages Up to 30 days
+- Gittr Chat Access
+- Documentation Site
+- Email Support
+
+== Amethyst Subscription
+
+- Up To 25 Things
+- Up To 100K Collected Messages
+- Up To 100K Sent Messages
+- Retain Messages Up to 120 days
+- Gittr Chat Access
+- Documentation Site
+- Email Support
+- Slack Support
+
+== Data Retention Polices
+The number and age of thing egress messages you can collect for an account is based on your subscription. Your subscription policy determines how many messages will be retained for you account. Messages outside of the retention policy are automatically deleted.
+
+NOTE: If you downgrade your subscription the retentention policy will change and you may loose stored egress messages.
+
+== Canceling or Downgrading A Subscription
+Our support staff can help you cancel or downgrade your subscription. Email sales at mailto:sales@flashlex.com[FlashLex Sales].
+

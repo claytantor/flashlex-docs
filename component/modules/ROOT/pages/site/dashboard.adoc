@@ -16,8 +16,22 @@ The user dashboard is the starting point for you as a FlashLex user to know all 
 
 What you are allowed to do is based on your subscription type. For a more detailed explanation of how subscriptions work got to <<site/subscriptions.adoc#,FlashLex Subscriptions>>
 
-= Active Subscription
+== Active Subscription
+image::dashboard-subscription.png[Things allowed,668,86]
+
+The dashboard shows you the currently active subscription. The subscription you have determines how many things you can provision, and how many messages you can send or recieve. For more information goto <<site/subscriptions.adoc#,FlashLex Subscriptions>>
+
+== Dashboard Gauges
+image::dashboard-gauges.png[Things allowed,600,200]
+The dashboard gauges are intended to give you a simple visual representation of you subscription policy.
+
+=== The Thing Gauge
+FlashLex keeps track of how many things you have created. This gauge show you how many you have created vs what you are allowed. If the guage is high then you may want to upgrade your subscription.
+
+=== Egress Gauge (outgoing)
+FlashLex keeps track of how many messages that are sent out of the things in your account and stored in the cloud to be retrieved later. This gauge represents the number of messages that that have been recieved and stored in the subscription period. These messages can be downloaded at any time if you would like them to not be deleted by your subscription retention policy.
+
+=== Ingress Gauge (incoming)
+FlashLex keeps track of how many messages are sent to the things in your account. This gauge represents the number of messages that that have been sent in the subscription period. 
 
 
-= Thing Gauge
-image::dashboard-thing.png[Things allowed,300,300]
