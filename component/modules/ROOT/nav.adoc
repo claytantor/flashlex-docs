@@ -8,7 +8,7 @@
 
 .FlashLex API Reference
 * xref:api/index.adoc[API Overview]
-* http://docs.flashlex.com.s3-website-us-east-1.amazonaws.com/flashlex-docs/1.2.dev/swagger/index.html[API Documentation]
+* http://docs.flashlex.com.s3-website-us-east-1.amazonaws.com/flashlex-docs/1.3.dev/swagger/index.html[API Documentation]
 
 .FlashLex Thing SDK
 * xref:sending-messages.adoc[Sending Messages]
