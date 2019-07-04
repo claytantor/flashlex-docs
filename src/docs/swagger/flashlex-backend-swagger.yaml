@@ -5,7 +5,7 @@ info:
   title: "flashlex-backend"
   description: 'The FlashLex API provides a backend connected to the internet the ability to send and recieve messages to your IOT fleet.'
 host: "api.flashlex.com"
-basePath: "/v1"
+basePath: "/prd/v1"
 schemes:
 - "https"
 paths:

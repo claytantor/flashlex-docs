@@ -18,6 +18,17 @@ Its core elements include:
 - Auth - Get JWT access tokens for making API calls. 
 - Users - Get you user info and settings. 
 
+== API Endpoints
+
+[width="80%",cols="10,10",options="header"]
+|=========================================================
+|Endpoint |Notes
+
+|https://api.flashlex.com/prd/v1 |
+The V1 version of the API. Make all API calls here.
+
+|=========================================================
+
 == API Specification Docs
 We generate API specification docs from Swagger. 
 
