@@ -21,9 +21,9 @@ image::dashboard-subscription.png[Things allowed,668,86]
 
 The dashboard shows you the currently active subscription. The subscription you have determines how many things you can provision, and how many messages you can send or recieve. For more information goto <<site/subscriptions.adoc#,FlashLex Subscriptions>>
 
-== Dashboard Gauges
+== Policy Gauges
 image::dashboard-gauges.png[Things allowed,600,200]
-The dashboard gauges are intended to give you a simple visual representation of you subscription policy.
+The dashboard gauges are intended to give you a simple visual representation of your subscription policy, which is how FlashLex determines what you are allowed to provision based on your subscription. 
 
 === The Thing Gauge
 FlashLex keeps track of how many things you have created. This gauge show you how many you have created vs what you are allowed. If the guage is high then you may want to upgrade your subscription.
@@ -34,4 +34,11 @@ FlashLex keeps track of how many messages that are sent out of the things in you
 === Ingress Gauge (incoming)
 FlashLex keeps track of how many messages are sent to the things in your account. This gauge represents the number of messages that that have been sent in the subscription period. 
 
+== Subscription Details
+The dashboard provides an overview of your current subscription state, charges and plan as recording by our payment processing system.
+
+- Subscription Info - The dates and status of the active subcription. 
+- Plan Info - What is the subscription plan associated with the current active subscription.
+- Charge Info - What was the last charge made to the payment method and details on the payment method. 
+- Invoice Info - Every subscription produces an invoice that can be downloaded with purchase details.
 

@@ -3,8 +3,18 @@
 
 .FlashLex Site
 * xref:site/registration.adoc[Registration]
-* xref:site/dashboard.adoc[The Dashboard]
 * xref:site/subscriptions.adoc[Subscriptions]
+* xref:site/dashboard.adoc[The Dashboard]
+** xref:site/dashboard.adoc#policy-gauges[Policy Gauges]
+** xref:site/dashboard.adoc#subscription-details[Subscription Details]
+* xref:site/things.adoc[Things]
+** xref:site/things.adoc#provisioning-a-thing[Provisioning A Thing]
+** xref:site/things.adoc#downloading-sdk-distribution[Download SDK Distribution]
+** xref:site/things.adoc#bootstrapping[Bootstrapping]
+** xref:site/things.adoc#sending-a-test-message-ingress[Sending Test Message]
+* xref:site/user_settings.adoc[Settings]
+* xref:site/access_token.adoc[Access Token]
+
 
 .FlashLex API Reference
 * xref:api/index.adoc[API Overview]

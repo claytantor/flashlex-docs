@@ -1,4 +1,4 @@
-== FlashLex Things
+= FlashLex Things
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -8,10 +8,39 @@ endif::[]
 :toc:
 
 == Overview
-image::flashlex-send-use.png[send usecase]
+FlashLex Things are actually any device capabile of running the FlashLex Distribution and SDK. Currently that means any device that can effectively run Python applications in an automated way. 
 
-== How Does My Backend Send Messages?
-How Does My Thing Application Use The SDK Send Messages
+Commonly this is a small single board computer such as a Raspberry PI but really it can be any python based computer with enough resources to run teh FlashLex Python distribution. 
 
-== How Does My Thing Application Use The SDK To Recieve Messages?
-How Does My Thing Application Use The SDK Send Messages
+There are a few expectations we about your thing that would enable your ability to effectively install and run the distribution.
+
+1. Your thing has enough memory and compute scale to run the FlashLex distribution.
+1. Your thing is connected to the internet.
+1. You can SSH into your thing to install the distribution.
+
+This guide will cover a few concepts essential to standing up your FlashLex IOT fleet:
+
+- Provisioning A New Thing
+- Downloading The Thing Distribution
+- Bootstrapping 
+- Sending a Test Message (Ingress)
+- Collecting A Message From Your Thing (Egress)
+
+== Provisioning A Thing
+All things are provisioned from the "Things" Page. It is one of the top line menubar items as peer level to "Dashboard", "Access Token", and "User Settings".
+
+Lorem ipsum dolor amet pinterest vexillologist shabby chic edison bulb pour-over four dollar toast art party salvia iPhone heirloom blue bottle fixie 3 wolf moon jean shorts hoodie. Fam +1 freegan actually mumblecore poke kitsch fingerstache food truck retro microdosing. Four loko cray fanny pack kogi migas actually tattooed, brooklyn pabst woke organic. Cliche hella keytar, crucifix umami selvage artisan cloud bread. Fanny pack activated charcoal chartreuse lomo portland, affogato palo santo hella occupy meh butcher. Chambray authentic gluten-free iceland cray 8-bit vape, hammock slow-carb.
+
+
+== Downloading SDK Distribution
+Blue bottle flannel paleo enamel pin disrupt single-origin coffee. Pinterest pabst gentrify keffiyeh snackwave. Live-edge humblebrag stumptown, meditation blog cloud bread microdosing. Tacos mlkshk shoreditch palo santo raw denim, stumptown viral kickstarter man braid adaptogen. Irony wolf single-origin coffee deep v butcher skateboard +1 waistcoat snackwave shoreditch.
+
+== Bootstrapping
+Master cleanse tacos truffaut wayfarers stumptown salvia kombucha franzen tousled slow-carb fingerstache kickstarter. 3 wolf moon ramps organic affogato, sriracha waistcoat thundercats normcore echo park. Mustache adaptogen trust fund art party banh mi vinyl, bicycle rights fashion axe taiyaki seitan VHS PBR&B asymmetrical microdosing. Glossier ramps XOXO cronut swag selfies. Marfa disrupt VHS sriracha, tilde enamel pin air plant godard irony PBR&B. Church-key cronut adaptogen, microdosing messenger bag pop-up biodiesel art party blog master cleanse bespoke cray lyft drinking vinegar.
+
+== Sending a Test Message (Ingress)
+Raw denim selvage bitters tofu leggings farm-to-table, tacos literally dreamcatcher lumbersexual. XOXO fingerstache banh mi fixie. Mixtape edison bulb bespoke pitchfork keffiyeh. Vaporware coloring book lyft hell of helvetica. Taxidermy helvetica skateboard tumblr meggings keffiyeh, meditation bitters. Actually bushwick pinterest, succulents snackwave put a bird on it VHS chicharrones. Fingerstache swag taiyaki tousled adaptogen direct trade, vape brunch wayfarers hot chicken wolf ramps edison bulb poutine cardigan.
+
+== Collecting A Message (Egress)
+Keffiyeh direct trade schlitz church-key freegan pork belly. Adaptogen aesthetic pickled, occupy lomo fam chia. Lomo tumblr locavore, pour-over butcher freegan vexillologist art party tattooed shoreditch snackwave crucifix. Ennui offal lo-fi raclette skateboard celiac air plant viral. Drinking vinegar bicycle rights copper mug stumptown blue bottle taiyaki crucifix knausgaard portland four dollar toast PBR&B. Tilde tumblr man bun venmo. Wayfarers ennui seitan, meh hammock shaman hot chicken try-hard selvage cred gochujang lumbersexual paleo.
+

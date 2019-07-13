@@ -1,0 +1,13 @@
+= FlashLex API Access Token
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+:toc:
+
+== Overview
+Every FlashLex user can obtain access tokens intended for API calls. Access tokens are JWT based keys that can securely insure that the caller is intended to use FlashLex.
+
+image::access-token.png[access token]

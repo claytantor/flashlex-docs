@@ -1,0 +1,11 @@
+= User Settings
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+:toc:
+
+== Overview
+FlashLex Things are actually any device capabile of running the FlashLex Distribution and SDK. Currently that means any device that can effectively run Python applications in an automated way. 
