@@ -1,5 +1,5 @@
 name: flashlex-docs
 title: FlashLex
-version: 1.3.dev
+version: 1.3
 nav:
 - modules/ROOT/nav.adoc
