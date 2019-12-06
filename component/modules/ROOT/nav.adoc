@@ -21,8 +21,8 @@
 * http://docs.flashlex.com.s3-website-us-east-1.amazonaws.com/flashlex-docs/1.3.dev/swagger/index.html[API Documentation]
 
 .FlashLex Thing SDK
-* xref:sending-messages.adoc[Sending Messages]
-* xref:collecting-messages.adoc[Collecting Messages]
+* xref:sdk/index.adoc[SDK Overview]
+* xref:sdk/building-iot-apps.adoc[Building IOT Applications]
 
 
 

@@ -25,10 +25,10 @@ image::gs-how-it-works.png[how it works]
 This guide will show you in the simplest terms:
 
 1. How to provision a new thing.
-1. How to download and install the SDK on your thing.
-1. How to bootstrap the Thing SDK.
-1. How to Authenticate to the FlashLex API
-1. How to Send a message to your Thing using the FlashLex API
+2. How to download and install the SDK on your thing.
+3. How to bootstrap the Thing SDK.
+4. How to Authenticate to the FlashLex API 
+5. How to Send a message to your Thing using the FlashLex API
 
 == Provision Your Thing
 You will need to provision you thing and download the distribution.
