@@ -5,7 +5,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
-    working_directory: ~/flashlex-site
+    working_directory: ~/flashlex-docs
     steps:
       - checkout
       - restore_cache:
@@ -23,15 +23,15 @@ jobs:
             - ./node_modules
       - run: 
           name: Create Test Dir
-          command: mkdir ~/junit
+          command: mkdir ~/flashlex-docs/junit
       - run:
           name: Test
           command: npm run test
           environment:
-            MOCHA_FILE: ~/junit/test-results.xml
+            MOCHA_FILE: ~/flashlex-docs/junit/test-results.xml
           when: always
       - store_test_results:
-          path: ~/junit/test-results.xml
+          path: ~/flashlex-docs/junit/test-results.xml
       - store_artifacts:
           path: ~/junit/test-results.xml
       - run:
