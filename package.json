@@ -10,7 +10,7 @@
     "build_swagger": "VERSION=$(bash iac/bash/version.sh) SWAGGER_FILE=$(bash iac/bash/swaggerfile.sh) && spectacle --target-dir build/site/flashlex-docs/$VERSION/swagger src/docs/swagger/$SWAGGER_FILE",
     "serve": "$(npm bin)/serve build/site",
     "buildui": "cd ui && $(npm bin)/gulp bundle && cd ..",
-    "publish": "npm run clean && npm run build_swagger && npm run build_docs && bash iac/bash/copyweb.sh"
+    "publish": "npm run clean && npm run build_swagger && npm run build_docs"
   },
   "author": "",
   "license": "ISC",
