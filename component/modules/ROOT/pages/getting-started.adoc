@@ -25,10 +25,10 @@ image::gs-how-it-works.png[how it works]
 This guide will show you in the simplest terms:
 
 1. How to provision a new thing.
-1. How to download and install the SDK on your thing.
-1. How to bootstrap the Thing SDK.
-1. How to Authenticate to the FlashLex API
-1. How to Send a message to your Thing using the FlashLex API
+2. How to download and install the SDK on your thing.
+3. How to bootstrap the Thing SDK.
+4. How to Authenticate to the FlashLex API 
+5. How to Send a message to your Thing using the FlashLex API
 
 == Provision Your Thing
 You will need to provision you thing and download the distribution.
@@ -45,5 +45,74 @@ A modal form will then pop up with the details to be entered for the the new thi
 
 image::create-thing-modal.png[things page]
 
-Once you submit
+Once you submit the thing will be created, and it will prefix the name of the thing with a unique id related to your user namespace.
+
+Running Bootstrap
+
+1. download the dist file 
+
+2. unzip it in a directory that has the name of your thing
+
+[source,bash]
+----
+36180455-reedway-home-1: (venv) $ ls -al
+total 416
+drwxr-xr-x  12 claytongraham  staff   384B Nov 29 11:59 ./
+drwxr-xr-x   4 claytongraham  staff   128B Nov 29 11:54 ../
+-rw-r--r--@  1 claytongraham  staff   6.0K Nov 29 11:55 .DS_Store
+-rw-r--r--   1 claytongraham  staff   1.2K Nov 29  2019 36180455-reedway-home-1-certificate.pem
+-rw-r--r--   1 claytongraham  staff   1.6K Nov 29  2019 36180455-reedway-home-1-keypair-private.pem
+-rw-r--r--   1 claytongraham  staff   451B Nov 29  2019 36180455-reedway-home-1-keypair-public.pem
+-rw-r--r--   1 claytongraham  staff   2.3K Nov 29  2019 README.md
+-rw-r--r--   1 claytongraham  staff    99K Nov 29 11:57 base64.txt
+-rw-r--r--   1 claytongraham  staff   1.2K Nov 29  2019 config.yml
+-rw-r--r--   1 claytongraham  staff    75K Nov 29 11:58 dist.zip
+drwxr-xr-x  20 claytongraham  staff   640B Nov 29 12:17 flashlex-iot-python/
+-rw-r--r--   1 claytongraham  staff   1.2K Nov 29  2019 root-ca-cert.pem
+----
+
+1. goto the `flashlex-iot-python` dir and run teh following:
+
+[source,bash]
+----
+python3 -m venv venv --system-site-packages
+source venv/bin/activate
+python3 -m pip install --user --upgrade pip
+python3 -m pip install -r requirements.txt
+python3 -u bootstrap.py -c $(pwd)/../config.yml
+----
+
+you should see the bootstrap running:
+
+[source,bash]
+----
+starting flashelex app.
+INFO       2019-11-29 13:33:15,663 __init__                             87  : MqttCore initialized
+INFO       2019-11-29 13:33:15,663 __init__                             88  : Client id: 36180455-reedway-home-1
+INFO       2019-11-29 13:33:15,663 __init__                             89  : Protocol version: MQTTv3.1.1
+INFO       2019-11-29 13:33:15,663 __init__                             90  : Authentication type: TLSv1.2 certificate based Mutual Auth.
+INFO       2019-11-29 13:33:15,663 configure_endpoint                   139 : Configuring endpoint...
+INFO       2019-11-29 13:33:15,663 configure_cert_credentials           131 : Configuring certificates...
+INFO       2019-11-29 13:33:15,672 configure_reconnect_back_off         151 : Configuring reconnect back off timing...
+INFO       2019-11-29 13:33:15,672 configure_reconnect_back_off         152 : Base quiet time: 1.000000 sec
+INFO       2019-11-29 13:33:15,672 configure_reconnect_back_off         153 : Max quiet time: 30.000000 sec
+INFO       2019-11-29 13:33:15,673 configure_reconnect_back_off         154 : Stable connection time: 10.000000 sec
+INFO       2019-11-29 13:33:15,673 configure_offline_requests_queue     181 : Configuring offline requests queueing: max queue size: -1
+INFO       2019-11-29 13:33:15,673 configure_draining_interval_sec      186 : Configuring offline requests queue draining interval: 0.500000 sec
+INFO       2019-11-29 13:33:15,673 configure_connect_disconnect_timeout_sec  143 : Configuring connect/disconnect time out: 60.000000 sec
+INFO       2019-11-29 13:33:15,673 configure_operation_timeout_sec      147 : Configuring MQTT operation time out: 120.000000 sec
+INFO       2019-11-29 13:33:15,673 connect                              190 : Performing sync connect...
+INFO       2019-11-29 13:33:15,674 connect_async                        199 : Performing async connect...
+INFO       2019-11-29 13:33:15,674 connect_async                        200 : Keep-alive: 600.000000 sec
+collecting message from thing: 5da91b24-28f2-4b55-829e-26528ba7a2eb
+/Users/claytongraham/data/app/things/36180455-reedway-home-1
+https://api.flashlex.com/prd/v1/things/5da91b24-28f2-4b55-829e-26528ba7a2eb/collect {'foo': 'bar'} {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjVkYTkxYjI0LTI4ZjItNGI1NS04MjllLTI2NTI4YmE3YTJlYiJ9.eyJleHAiOjE1NzUwNjM1NTUsIm5iZiI6MTU3NTA2MjgzNSwiaXNzIjoidXJuOnRoaW5nOjVkYTkxYjI0LTI4ZjItNGI1NS04MjllLTI2NTI4YmE3YTJlYiIsImF1ZCI6InVybjpmbGFzaGxleDo1ZGE5MWIyNC0yOGYyLTRiNTUtODI5ZS0yNjUyOGJhN2EyZWIifQ.UTOtMxXIwbXqGXQU8gJJ_J1GYI8jDu1ZLq7g6owwP6w--YRxR4m8ciJTW6NcFYGMbYeNZLUg8QD0gIOP0vnEiD_phl6h8_Tq3bMuMKNPlk71QQ6fQn5LzQTsqE01yyb_Xl2XVMugEW-Zwpy6S4nMNLfl2d7kF1XrrUVop-LYcUxtPfcueBuyc7gKSJPGrz-CYYge7gAw8lteJy7ip56qaqXHvy3WEPP71F00xK4BNc3jITCRHC1JOH5jsvwhhuTv1sdV3HzI7k8no4-LXt3m1feo3-Zv54PQ2rzpXz1G9Q6qzzefor4yPcjuSTGIVgNfdd4xoJaOLUpweR5YG1hsyg', 'Content-Type': 'application/json'}
+INFO       2019-11-29 13:33:18,624 publish                              258 : Performing sync publish...
+INFO       2019-11-29 13:33:18,731 run                                  173 : Published topic flashlex/test: {"thingId": "5da91b24-28f2-4b55-829e-26528ba7a2eb", "thingName": "36180455-reedway-home-1", "message": "This is a really basic message.", "sequence": 0}
+
+{"status":"OK","code":200,"messages":[{"key":"message","value":"Message collected."}],"result":{"message":"Message collected.","flthingspk":"5da91b24-28f2-4b55-829e-26528ba7a2eb","flmessagespk":"f5f10afe-0bb8-46be-a8c4-661c7a2e08bf"}}
+FlashlexSDK Collector Status Code: 200
+INFO       2019-11-29 13:33:23,736 publish                              258 : Performing sync publish...
+INFO       2019-11-29 13:33:23,851 run                                  173 : Published topic flashlex/test: {"thingId": "5da91b24-28f2-4b55-829e-26528ba7a2eb", "thingName": "36180455-reedway-home-1", "message": "This is a really basic message.", "sequence": 1}
+----
 

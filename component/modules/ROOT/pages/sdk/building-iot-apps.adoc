@@ -1,0 +1,12 @@
+= Building IOT Applications with the FlashLex SDK 
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+:source-highlighter: pygments
+:toc:
+
+== How Do I Use The FlashLex SDK To Build IOT Applications?
+The FlashLex SDK is an open source client library that you can inetgrate into your own IOT applications. It is intended to run as a service on your thing and provide a local cache for your thing messages.

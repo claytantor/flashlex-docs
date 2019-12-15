@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.18
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/flashlex-docs
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            # Find a cache corresponding to this specific package-lock.json
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            # Fallback cache to be used
+            - v1-npm-deps-
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Antora Build All Docs
+          command: npm run build_all_docs
+      - aws-cli/install
+      - run: aws --version
+      - run:
+          name: Deploy To S3
+          command: bash iac/bash/copyweb.sh $(node iac/js/branchenv.js)
+
+workflows:
+  version: 2
+  build_all:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: 
+              - master

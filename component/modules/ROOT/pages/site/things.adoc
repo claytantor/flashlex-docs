@@ -15,8 +15,8 @@ Commonly this is a small single board computer such as a Raspberry PI but really
 There are a few expectations we about your thing that would enable your ability to effectively install and run the distribution.
 
 1. Your thing has enough memory and compute scale to run the FlashLex distribution.
-1. Your thing is connected to the internet.
-1. You can SSH into your thing to install the distribution.
+2. Your thing is connected to the internet.
+3. You can SSH into your thing to install the distribution.
 
 This guide will cover a few concepts essential to standing up your FlashLex IOT fleet:
 

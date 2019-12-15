@@ -1,0 +1,177 @@
+= FlashLex SDK *{page-component-version}*
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+:source-highlighter: pygments
+:toc:
+
+== What is the FlashLex SDK?
+The FlashLex SDK is an *open source* python based client library that you can inetgrate into your own IOT applications. It is intended to run as a service on your thing and provide a local cache for your thing messages.
+
+This guide covers the a few aspects to get up and running with integrating the FlashLex SDK with your IOT application:
+
+* Installing the FlashLex SDK on your IOT Device
+* Configuring and Bootstraping your IOT Device for FlashLex
+* Creating and Starting The FlashLex service
+
+== Installing the FlashLex SDK on your IOT Device
+
+There are 2 ways to install the flashlex client on your IOT device:
+
+1. Building and Installing the SDK from Github - The SDK is open source so its freely available for download.  
+2. Install with pip - Install
+
+For all installations we reccomend using link:https://docs.python-guide.org/dev/virtualenvs/[Virtualenv] unless you are attempting to build a base image for SD Flashing.
+
+=== Building and Installing the SDK from Github
+The link:https://github.com/claytantor/flashlex-iot-python[flashlex-sdk] is an opensource project that anyone can download or contribute to for free. If you would like you can always install it directly to your device.
+
+[source,bash]
+----
+git clone https://github.com/claytantor/flashlex-iot-python.git
+cd flashlex-iot-python
+sudo python setup.py install
+----
+
+=== Installing from PyPi with pip3
+We have a link:https://pypi.org/project/flashlexiot/[FlashLex dist in PyPi] that allows you to use pip3 to install the FlashLex SDK.
+
+[source,bash]
+pip install flashlexiot
+
+== Configuring and Bootstraping your IOT Device for FlashLex
+FlashLex runs as a service on your IOT device. It recieves messages over secure transport using MQTT using a topic that is dedicated to the thing. The configuration tells the FlashLex service how to listen to the topic and write messages to local storage. Then your application uses the SDK to get messages from the local store.
+
+image::flashlex-sdk-arch01.png[sdk architecture]
+
+=== The Service Configuration File
+The way that FlashLex runs as a service is with a configuration file. The configuration file has all the information needed for the service to know how to recieve and store messages for the thing (ingress) as well as allow your thing to collect and store messages on the FlashLex cloud (egress). 
+
+[source,yaml]
+----
+flashlex:
+  app:
+    api:
+      endpoint: https://api.flashlex.com 
+      env: dev
+    callback: persistent
+    thread: subscribe
+    message: This is a really basic message.
+    db:
+      subscriptionData: subscription.json
+      expireSeconds: 60 #messages older than an minute     
+  dist:
+    commitSha: 75ac348aa2ddc249717516d57ff1f03051179625
+  thing:
+    id: 349c5942-77d6-4f36-880b-1762a3b07f06
+    name: ecd13b11-mything
+    endpoint: a1khvirpxw0646-ats.iot.us-east-1.amazonaws.com
+    keys:
+      rootCA: root-ca-cert.pem
+      cert: ecd13b11-mything-certificate.pem
+      privateKey: ecd13b11-mything-keypair-private.pem
+      publicKey: ecd13b11-mything-keypair-public.pem
+    mqtt:
+      pubsub:
+        topic: pubsub/ecd13b11-mything
+      ingress:
+        topic: ingress/ecd13b11-mything
+      egress:
+        topic: flashlex/collect 
+      useWebsocket: false
+      port: 8883
+      autoReconnectBackoffTime:
+        baseReconnectQuietTimeSecond: 1
+        maxReconnectQuietTimeSecond: 30 
+        stableConnectionTimeSecond: 10
+      offlinePublishQueueing: -1
+      drainingFrequency: 2
+      connectDisconnectTimeout: 60
+      mqttOperationTimeout: 120
+----  
+
+=== Running The Bootstrap Application
+The bootstrap application, included with your SDK distribution, will allow you to verify that your configuration and and connectivity for your thing to FlashLex is correct and you can start integrating with your application.
+
+[source,bash]
+python -u bootstrap.py -c keys/config-bootstrap.yml -d $(pwd)/data -k $(pwd)/keys
+
+== Creating and Starting The FlashLex service
+FlashLex SDK runs as a systemctl service, that allows it to come back up and listen to FlashLex even if the power goes down. It brings an extra level of stability and resiliancy to your IOT device.
+
+=== Making the systemd service file
+The systemd service file is based on your os level and application requirements so we have provided an application that allows you to set specific attributes for the system file pror to copying it and starting the service.
+
+[source,bash]
+----
+[Unit]
+Description=flashlex
+After=multi-user.target
+
+[Service]
+ExecStart={{dir}}/venv/bin/python -u {{dir}}/app.py --config {{dir}}/keys/config.yml
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=flashlex
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+----
+
+=== Creating the systemd service
+Generic instructions for setting up a service on a Raspberry Pi can be found at https://www.raspberrypi-spy.co.uk/2015/10/how-to-autorun-a-python-script-on-boot-using-systemd/
+
+From the directory that you expanded your distribution to:
+
+[source,bash]
+----
+sudo cp flashlex.service /lib/systemd/system/flashlex.service
+sudo chmod 644 /lib/systemd/system/flashlex.service
+sudo systemctl daemon-reload
+sudo systemctl enable flashlex.service
+----
+
+=== Add Logging with syslog
+Then, assuming your distribution is using rsyslog to manage syslogs, create a file in `/etc/rsyslog.d/<new_file>.conf` with the following content:
+
+[source,bash]
+----
+if $programname == '<your program identifier>' then /path/to/log/file.log
+& stop
+----
+
+restart rsyslog (sudo systemctl restart rsyslog) and enjoy! Your program stdout/stderr will still be available through journalctl (sudo journalctl -u <your program identifier>) but they will also be available in your file of choice.
+
+[source,bash]
+----
+sudo cp flashlex.conf /etc/rsyslog.d/flashlex.conf
+sudo systemctl daemon-reload
+sudo systemctl restart flashlex.service
+sudo systemctl restart rsyslog
+----
+
+you will want to rotate logs so your disk doesnt fill up with logs. your conf file for logrotation looks like this in `/etc/logrotate.conf`:
+
+[source,bash]
+----
+/var/log/flashlex.log {
+    daily
+    missingok
+    rotate 7
+    maxage 7
+    dateext
+    dateyesterday
+}
+----
+
+make a crontab that executes logrotate daily
+
+[source,bash]
+----
+/usr/sbin/logrotate /etc/logrotate.conf
+----
