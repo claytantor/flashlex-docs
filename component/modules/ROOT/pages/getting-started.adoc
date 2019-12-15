@@ -71,7 +71,7 @@ drwxr-xr-x  20 claytongraham  staff   640B Nov 29 12:17 flashlex-iot-python/
 -rw-r--r--   1 claytongraham  staff   1.2K Nov 29  2019 root-ca-cert.pem
 ----
 
-3. goto the `flashlex-iot-python` dir and run teh following:
+1. goto the `flashlex-iot-python` dir and run teh following:
 
 [source,bash]
 ----
