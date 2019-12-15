@@ -7,7 +7,7 @@ content:
     start_path: component
     branches: 
       - dev
-      # - master
+      - master
 ui:
   bundle:
     url: ./ui/build/ui-bundle.zip
