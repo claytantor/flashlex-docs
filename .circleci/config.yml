@@ -35,8 +35,8 @@ jobs:
       - store_artifacts:
           path: ~/junit/test-results.xml
       - run:
-          name: Antora Build
-          command: npm run publish
+          name: Antora Build All Docs
+          command: npm run build_all_docs
       - aws-cli/install
       - run: aws --version
       - run:
