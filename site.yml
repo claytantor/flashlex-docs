@@ -5,9 +5,8 @@ content:
   sources:
   - url: .
     start_path: component
-    branches: 
-      - dev
-      # - master
+    branches: master
+    tags: v*
 ui:
   bundle:
     url: ./ui/build/ui-bundle.zip
